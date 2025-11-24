@@ -1,0 +1,112 @@
+
+.note{
+ background-color: var(--mat-sys-surface-container);
+  color: var(--mat-sys-on-surface);
+  padding: 6px 10px 6px 20px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  border-radius: 4px;
+  margin-bottom: 20px;
+}
+
+
+
+
+.name-field {
+  display: flex;
+  align-items: center;
+
+  gap: 15px;
+}
+.checkbox-cont {
+  position: relative;
+  width: 36px;
+  height: 36px;
+}
+.avatar {
+  /* background-color: #58b33e30; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+}
+.select-all-btn {
+  display: flex;
+  align-items: center;
+  color: var(--mat-sys-primary);
+}
+.select-all-btn button {
+  display: flex;
+  margin-right: -5px;
+  align-items: center;
+  justify-content: center;
+}
+.select-all-span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  background: var(--mat-sys-primary);
+  color: var(--mat-sys-on-primary);
+  border-radius: 5px;
+}
+.select-all-span .mat-icon {
+  width: 18px;
+  height: 18px;
+  font-size: 18px;
+}
+.avatar,
+.checkbox {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transition: 0.3s ease opacity;
+  translate: -50% -50%;
+}
+.checkbox {
+  opacity: 0;
+}
+tr.selected .checkbox,
+table tr:hover .checkbox {
+  opacity: 1;
+}
+tr.selected .avatar,
+table tr:hover .avatar {
+  opacity: 0;
+}
+
+.head {
+  position: sticky;
+  top: 0;
+  background-color: #fff;
+  z-index: 20;
+}
+.head.hide {
+  display: none;
+}
+.actions-head {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  border-bottom: 1px solid #c4c7c5;
+
+  height: 50px;
+}
+.actions-head .btns {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-left: auto;
+}
+
+
+ .label {
+  margin-left: 20px;
+  font-size: 12px;
+  margin-bottom: 10px;
+  color:  var(--mat-sys-secondary);
+}

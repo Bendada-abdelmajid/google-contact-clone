@@ -1,0 +1,136 @@
+.header-cont {
+  width: 100vw;
+  position: fixed;
+  z-index: 3;
+  top: 0;
+  left: 0;
+}
+.header {
+  display: flex;
+  align-items: center;
+}
+.left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 284px;
+}
+.right {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  flex: 1;
+}
+.right .btns {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.search-cont {
+  display: none;
+  flex: 1;
+  margin-right: 20px;
+  cursor: text;
+}
+.search-cont .placehoder {
+  opacity: 0.7;
+  font-size: 16px;
+}
+.search {
+  flex: 1;
+  margin-right: 20px;
+}
+
+.logo {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.logo img {
+  width: 40px;
+  height: 40px;
+}
+
+.avatar img {
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+}
+.search-btn {
+  margin-left: auto;
+  display: none !important;
+}
+.close-search {
+  display: none !important;
+}
+@media (max-width: 900px) {
+  .header-cont {
+    width: calc(100vw - 20px);
+
+    top: 10px;
+    border-radius: 30px;
+    left: 10px;
+    right: 10px;
+    transition: 0.3s ease;
+  }
+  .header-cont.show-search {
+    width: 100vw;
+    top: 0;
+    left: 0;
+    right: 0;
+    padding: 10px 0;
+    bottom: 0;
+    height: 100vh;
+    border-radius: 0px;
+    background: var(--mat-sys-surface);
+  }
+
+  .header {
+   padding: 6px;
+    border-radius: 30px;
+    overflow: hidden;
+    transition: ease 0.3s;
+    border-bottom: 1px solid transparent;
+    --mat-toolbar-standard-height: 50px;
+  }
+  .header-cont.show-search .header {
+    border-radius: 0px;
+    border-bottom-color: var(--mat-sys-surface-dim);
+  }
+  .header-cont.show-search .search-cont,
+  .header-cont.show-search .left,
+  .header-cont.show-search .avatar {
+    display: none;
+  }
+  .header-cont.show-search .right {
+    gap: 10px;
+  }
+  .header-cont.show-search .close-search {
+    display: flex !important;
+  }
+
+  .search-cont {
+    display: block;
+    margin-right: 0;
+  }
+
+  .search {
+    margin-right: 0;
+    display: none;
+  }
+  .header-cont.show-search .search {
+    display: block;
+  }
+
+  .logo {
+    display: none;
+  }
+  .btns {
+    display: none !important ;
+  }
+  .left {
+    width: 48px;
+  }
+}

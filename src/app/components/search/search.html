@@ -1,0 +1,39 @@
+<form class="search-form"  matAutocompleteOrigin #origin="matAutocompleteOrigin">
+  <mat-icon class="search-icon small-icon">search</mat-icon>
+  <input
+    type="text"
+    placeholder="Search"
+    aria-label="search"
+    [value]="searchValue()"
+    (input)="onSearchChange($any($event.target).value)"
+    [matAutocomplete]="auto"
+  />
+  @if(searchValue()){
+  <button type="button" (click)="clear()" matIconButton><mat-icon>close</mat-icon></button>}
+  <mat-autocomplete  #auto="matAutocomplete" class="search-result">
+    @for (option of filteredOptions(); track option) {
+    <mat-option [value]="option">
+      <a class="option" [routerLink]="['/person', option.id]" (click)="clear()">
+        @if(option.photoUrl){
+        <img class="avatar" [src]="option.photoUrl" alt="" />
+        }@else {
+        <span
+          class="avatar"
+          [style]="{
+            'background-color': option.stringToColor()
+          }"
+        >
+          {{ option.getInitials() }}</span
+        >
+        }
+        <p>
+          {{ option.firstName || '' }} {{ option.lastName || '' }}
+          <span> - {{ option.getEmail() }}</span>
+        </p>
+      </a>
+    </mat-option>
+    } @empty { @if (searchValue()) {
+    <mat-option disabled>No results found</mat-option>
+    } }
+  </mat-autocomplete>
+</form>

@@ -1,0 +1,26 @@
+@if(isLoading){<div class="loader"></div> }
+<h2 mat-dialog-title>Import contacts</h2>
+<mat-dialog-content class="content">
+  <input type="file" (change)="onFileSelected($event)" hidden #fileInput />
+  @if (file) {
+  <div class="file-name">
+    <mat-icon class="filled">check_circle_filled</mat-icon>
+    <span>{{ file!.name }}</span>
+    <button (click)="unSelectedFile()" matIconButton><mat-icon>close</mat-icon></button>
+  </div>
+  <p class="success">File successfully uploaded. Click Import below to start importing.</p>
+  <div class="label-cont">
+    <span>Optional: {{contactLabels().length}}</span>
+    <app-label-selector [selectedLabels]="contactLabels()" (onApply)="handleLabelApply($event)"></app-label-selector>
+  </div>
+  } @else {
+  <p class="desc">
+    To get started, select a file. <br />Use a CSV or vCard format or our template.
+  </p>
+  <button class="file-btn" mat-flat-button (click)="fileInput.click()">Select file</button>
+  }
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button (click)="onCancel()">Cancel</button>
+  <button mat-button (click)="onConfirm()" [disabled]="!file">Import</button>
+</mat-dialog-actions>

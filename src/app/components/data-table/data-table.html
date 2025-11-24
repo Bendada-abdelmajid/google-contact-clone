@@ -1,0 +1,168 @@
+<div class="table-container responsive-table">
+<div class="actions-head head" [class.hide]="selectedContacts().length == 0">
+  <p class="select-all-btn" [matMenuTriggerFor]="menu">
+    <button matIconButton>
+      <span class="select-all-span">
+        @if(selectedContacts().length  == data.length){
+        <mat-icon>check_indeterminate_small</mat-icon>
+        } @else {
+        <mat-icon>check_indeterminate_small</mat-icon>
+        }
+      </span>
+    </button>
+    <mat-icon>arrow_drop_down</mat-icon>
+  </p>
+  <p>{{ selectedContacts().length  }} selected</p>
+
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item (click)="selectAll()">
+      <span>All</span>
+    </button>
+    <button mat-menu-item (click)="deselectAll()">
+      <span>None</span>
+    </button>
+  </mat-menu>
+
+  <div class="btns">
+    <button matIconButton>
+      <mat-icon class="small-icon">label</mat-icon>
+    </button>
+    <button
+      matIconButton
+      [matMenuTriggerFor]="actionsMenu"
+      aria-label="Example icon-button with a menu"
+    >
+      <mat-icon class="small-icon">more_vert</mat-icon>
+    </button>
+
+    <mat-menu #actionsMenu="matMenu">
+      <app-contact-print [contacts]="selectedContacts()" [deselect]="deselectAll.bind(this)"></app-contact-print>
+  
+  
+      
+    </mat-menu>
+  </div>
+</div>
+<table mat-table [dataSource]="data" >
+  <!-- Name -->
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef  class="col-name">Name</th>
+    <td mat-cell *matCellDef="let contact" class="col-name">
+      <p class="name-field">
+        <span class="checkbox-cont">
+          @if(contact.photoUrl){
+          <img class="avatar" [src]="contact.photoUrl" alt="" />
+          }@else {
+          <span
+            class="avatar"
+            [style]="{
+              'background-color': contact.stringToColor()
+            }"
+          >
+            {{ contact.getInitials() }}</span
+          >
+          }
+          <!-- <span class="avatar"> {{ contact.name[0] }}</span> -->
+          <mat-checkbox
+            (click)="$event.stopPropagation()"
+            (change)="toggleSelection(contact)"
+            [checked]="isSelected(contact)"
+            class="checkbox"
+          />
+        </span>
+        <a [routerLink]="['/person', contact.id]"
+          >{{ contact.firstName || '' }} {{ contact.lastName || '' }}</a
+        >
+      </p>
+    </td>
+  </ng-container>
+
+  <!-- Email -->
+  <ng-container matColumnDef="email">
+    <th mat-header-cell *matHeaderCellDef class="col-email">Email</th>
+    <td mat-cell *matCellDef="let contact" class="col-email">
+      {{ contact.getEmail() }}
+    </td>
+  </ng-container>
+
+  <!-- Phone -->
+  <ng-container matColumnDef="phone">
+    <th mat-header-cell *matHeaderCellDef class="col-phone">Phone</th>
+    <td mat-cell *matCellDef="let contact"  class="col-phone">
+      {{ contact.getPhone() }}
+    </td>
+  </ng-container>
+
+  <!-- Job -->
+  <ng-container matColumnDef="job">
+    <th mat-header-cell *matHeaderCellDef  class="col-job">Job</th>
+    <td mat-cell *matCellDef="let contact"  class="col-job">{{ contact.jobTitle }}</td>
+  </ng-container>
+
+  <!-- Actions -->
+  <ng-container matColumnDef="actions">
+    <th mat-header-cell *matHeaderCellDef></th>
+    <td mat-cell *matCellDef="let contact">
+      <span class="actions-btns">
+        @if (!contact.hidden) {
+        <button
+          mat-icon-button
+          color="warn"
+          (click)="
+            toggleFavorite({ id: contact.id, name: contact.firstName, remove: contact.favorite })
+          "
+        >
+          <mat-icon class="small-icon" [class.filled]="contact.favorite">star</mat-icon>
+        </button>}
+        <a [routerLink]="['/person', contact.id, 'edit']" mat-icon-button color="primary">
+          <mat-icon class="small-icon">edit</mat-icon>
+        </a>
+
+        <button  
+          matIconButton
+          [matMenuTriggerFor]="menu"
+          aria-label="Example icon-button with a menu"
+        >
+          <mat-icon class="small-icon">more_vert</mat-icon>
+        </button>
+      </span>
+      <mat-menu #menu="matMenu" class="menu" tabindex="-1">
+        <app-contact-print [contacts]="[contact]"></app-contact-print>
+     
+        @if (labelService.labels().length> 0) {
+        <hr class="divider" />
+        <span class="label">Change Label</span>
+
+        @for (item of labelService.labels(); track item.id) {
+
+        <button
+          mat-menu-item
+          class="menu-item"
+          (click)="toogelLabel(item.id, contact.id, item.contacts.includes(contact.id))"
+        >
+          <mat-icon>label</mat-icon>
+          <p>{{ item.name }}</p>
+          @if (item.contacts.includes(contact.id)) {
+          <mat-icon class="check-icon">check</mat-icon>
+          }
+        </button>
+        } }
+      </mat-menu>
+    </td>
+  </ng-container>
+
+  <tr
+    class="head"
+    [class.hide]="selectedContacts().length  > 0"
+    mat-header-row
+    *matHeaderRowDef="displayedColumns"
+  ></tr>
+
+  <tr tabindex="1"
+    mat-row
+    *matRowDef="let row; columns: displayedColumns"
+    [class.selected]="isSelected(row)"
+  ></tr>
+</table>
+</div>
+<app-add-btn></app-add-btn>

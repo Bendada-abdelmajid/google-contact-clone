@@ -1,0 +1,18 @@
+@if(isLoading){<div class="loader"></div> }
+
+<h2 mat-dialog-title>Delete this label</h2>
+<mat-dialog-content class="content">
+  <p class="desc">This label has 1 contact. Choose what to do with it.</p>
+  <div class="radios">
+
+  
+  <mat-radio-group  aria-label="Select an option"  [(ngModel)]="deleteContacts">
+    <mat-radio-button [value]="false">Keep all contacts and delete this label</mat-radio-button>
+    <mat-radio-button [value]="true">Delete all contacts and delete this label</mat-radio-button>
+  </mat-radio-group>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button (click)="onCancel()">Cancel</button>
+  <button mat-flat-button (click)="onConfirm()">Delete</button>
+</mat-dialog-actions>

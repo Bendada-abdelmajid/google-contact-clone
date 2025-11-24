@@ -1,0 +1,59 @@
+.label-cont{
+    margin-bottom: 20px;
+      margin-left: 20px;
+}
+.add-label-btn {
+  width: fit-content;
+
+  padding: 0 15px;
+  border-radius: 8px;
+  font-size: 13px;
+
+  height: 28px;
+}
+.btns {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+ --mat-icon-button-touch-target-size:34px;
+ --mat-icon-button-state-layer-size:34px
+}
+.btns button {
+  margin: 0;
+}
+.menu-item {
+  --mat-menu-item-icon-size: 20px;
+  --mat-menu-item-with-icon-leading-spacing: 20px;
+  --mat-menu-item-label-text-size: 14px;
+  min-height: 40px !important;
+  width: 250px;
+  --mat-menu-item-label-text-color: var(--mat-sys-secondary);
+  --mat-menu-item-icon-color: var(--mat-sys-secondary);
+  text-transform: capitalize;
+
+}
+.divider {
+margin: 5px 0;
+  color: var(--mat-sys-shadow);
+  opacity: .5;
+}
+.menu-item .mat-icon {
+  font-size: 20px;
+}
+.menu-item .check-icon{
+  font-size: 20px;
+  order: 2;
+  margin: 0;
+  color: var(--mat-sys-primary);
+}
+
+ .label {
+
+  margin-left: 20px;
+  font-size: 14px;
+  padding: 10px 0 15px;
+  color:  var(--mat-sys-secondary);
+}
+.empty{
+opacity: 0;
+}

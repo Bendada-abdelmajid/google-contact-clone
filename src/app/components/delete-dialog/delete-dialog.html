@@ -1,0 +1,29 @@
+
+@if (data.state == "empty-trash") {
+<h2 mat-dialog-title>Empty Trash??</h2>
+} @else if (data.state == "delete-forever") {
+<h2 mat-dialog-title>Delete forever?</h2>
+}@else{
+<h2 mat-dialog-title>Delete {{ data.count > 1 ? 'selected' : 'from' }} contacts?</h2>
+}
+
+<mat-dialog-content class="content">
+  @if (data.state == "empty-trash") {
+  <p>Contacts in Trash will be deleted forever. This can't be undone.</p>
+  } @else if (data.state == "delete-forever") {
+  <p>This can't be undone</p>
+  } @else {
+  <p>
+    {{ data.count > 1 ? 'These contacts' : ' This contact ' }} 
+    will be permanently deleted from this
+    account after 30 days.
+  </p>
+  }
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button (click)="onCancel()">Cancel</button>
+  <button mat-button color="warn" (click)="onConfirm()">
+    @if (data.state == "empty-trash") { Empty Trash } @else if (data.state == "delete-forever") {
+    Delete forever }@else{ Move to trush }
+  </button>
+</mat-dialog-actions>

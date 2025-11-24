@@ -1,0 +1,118 @@
+<div class="sidenav">
+  <div class="logo">
+    <img
+      src="https://www.gstatic.com/images/branding/product/2x/contacts_2022_48dp.png"
+      width="40"
+      height="40"
+      alt=""
+    />
+    <span>Contacts</span>
+  </div>
+  <button mat-fab class="add-btn" (click)="uploadContacts()">
+    <mat-icon>add</mat-icon>
+    Add Contact
+  </button>
+
+  <mat-nav-list class="list">
+    <!-- Contacts -->
+    <mat-list-item routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+      <a routerLink="/" matLine>
+        <mat-icon>person_outline</mat-icon>
+        <span>Contacts</span>
+
+        @if (contactService.contacts()) {
+        <span class="count">{{ contactService.contacts().length }}</span>
+        }
+      </a>
+    </mat-list-item>
+
+    <!-- Favorites -->
+    <mat-list-item routerLinkActive="active">
+      <a routerLink="/favorites" matLine>
+        <mat-icon>star_outline</mat-icon>
+        <span>Favorites</span>
+
+        @if (contactService.favorites()) {
+        <span class="count">{{ contactService.favorites().length }}</span>
+        }
+      </a>
+    </mat-list-item>
+    <mat-list-item routerLinkActive="active" class="other-btn">
+      <a routerLink="/other" matLine>
+        <mat-icon>archive</mat-icon>
+        <span>Other Contacts</span>
+
+        <button [matMenuTriggerFor]="infoMenu" matIconButton class="count">
+          <mat-icon>info</mat-icon>
+        </button>
+
+        <mat-menu #infoMenu="matMenu" class="info-menu" xPosition="before">
+          <p class="info">
+            People you've interacted with in Google products, as well as any contacts you've hidden
+            from your list.
+          </p>
+          <button matButton style="margin: 6px 0">Learn more</button>
+        </mat-menu>
+      </a>
+    </mat-list-item>
+
+    <!-- Section label -->
+    <div class="label-cont">
+      <span class="label">Fix & Manage</span>
+    </div>
+
+    <!-- Merge & fix -->
+    <mat-list-item routerLinkActive="active">
+      <a routerLink="/suggestions" matLine>
+        <mat-icon>handyman</mat-icon>
+        <span>Merge & Fix</span>
+        @if (contactService.duplicateContacts().length > 0) {
+        <span class="duplicate-contacts">{{ contactService.duplicateContacts().length }}</span>
+        }
+      </a>
+    </mat-list-item>
+
+    <!-- Import -->
+    <mat-list-item>
+      <a (click)="import()" matLine>
+        <mat-icon>file_download</mat-icon>
+        <span>Import</span>
+      </a>
+    </mat-list-item>
+
+    <!-- Trash -->
+    <mat-list-item routerLinkActive="active">
+      <a routerLink="/trush" matLine>
+        <mat-icon>delete_outline</mat-icon>
+        <span>Trash</span>
+      </a>
+    </mat-list-item>
+
+    <!-- Labels section -->
+    <div class="label-cont">
+      <span class="label">Labels</span>
+      <button (click)="openDialog()" mat-icon-button>
+        <mat-icon>add</mat-icon>
+      </button>
+    </div>
+    @for (item of labelService.labels(); track item.id) {
+    <mat-list-item routerLinkActive="active" class="label-item-cont">
+      <div matLine class="label-item">
+        <a [routerLink]="['/label', item.id]">
+          <mat-icon>label</mat-icon>
+          <span>{{ item.name }}</span>
+          <span class="count">{{ item.contacts.length }}</span>
+        </a>
+        <div class="btns">
+          <button matIconButton (click)="updateLabel(item.name, item.id)">
+            <mat-icon class="small-icon">edit</mat-icon>
+          </button>
+          <button matIconButton (click)="deleteLabel(item.id)">
+            <mat-icon class="small-icon">delete</mat-icon>
+          </button>
+        </div>
+      </div>
+    </mat-list-item>
+    }
+  </mat-nav-list>
+</div>

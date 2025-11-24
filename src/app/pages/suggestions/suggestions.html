@@ -1,0 +1,102 @@
+<!-- <p>suggestions works!</p>
+<button (click)="showContacts()">show</button> -->
+<div class="content">
+  <div class="suggestions">
+    <div class="item">
+      <img
+        class="img"
+        src="https://gstatic.com/social/contactsui/images/mergeandfix/suggestions_welcome.svg"
+        alt=""
+      />
+      <div>
+        <h4>Easy ways to fix up your contacts</h4>
+        <p>Get help merging duplicates, adding useful details, and more</p>
+      </div>
+    </div>
+
+    <div class="item" [class.active]="contactService.duplicateContacts().length > 0" >
+      <div class="img">
+        <mat-icon>content_copy</mat-icon>
+      </div>
+      <div>
+        <h4>Merge duplicates</h4>
+        @if(contactService.duplicateContacts().length == 0){
+        <p>No one with duplicate listings</p>
+
+        } @else {
+        <p>{{ contactService.duplicateContacts().length }} person with duplicate listings</p>
+        }
+      </div>
+       @if(contactService.duplicateContacts().length == 0){
+       <mat-icon style="margin-left: auto; color: var(--mat-sys-primary);">check</mat-icon>
+
+        } @else {
+        <mat-icon style="margin-left: auto">arrow_right</mat-icon>
+        }
+      
+    </div>
+  </div>
+  <div class="result">
+    <div class="head">
+      <h4>Merge duplicates ({{ contactService.duplicateContacts().length }})</h4>
+      <button [disabled]="contactService.duplicateContacts().length == 0" matButton="filled" (click)="mergeAllContacts()">Merge All</button>
+    </div>
+    <div class="contact-list">
+      @for (contacts of dublicateGroups(); track $index) {
+      <div class="duplicate-group" [class.active]="contacts.length == 1">
+        @for (item of contacts; track item.id) {
+        <a [routerLink]="['/person', item.id]" class="contact-item">
+          <div class="avatar-cont">
+            @if(item.photoUrl){
+            <img class="avatar" [src]="item.photoUrl" alt="" />
+            }@else {
+            <span
+              class="avatar"
+              [style]="{
+                'background-color': item.stringToColor()
+              }"
+            >
+              {{ item.getInitials() }}</span
+            >
+            }
+          </div>
+          <div class="contact-info">
+            <h4 class="name">{{ item.getFullName() }}</h4>
+            @if(item.emails){ @for (item of item.emails; track $index) {
+            <p>
+              <span>{{ item.value }}</span>
+              @if(item.label){<span> • {{ item.label }}</span
+              >}
+            </p>
+            } } @if(item.phones){ @for (item of item.phones; track $index) {
+            <p>
+              <span>{{ item.value }}</span>
+              @if(item.label){<span> • {{ item.label }}</span
+              >}
+            </p>
+            } }
+          </div>
+        </a>
+        } @if(loadingGroups()[$index]){
+        <div class="spinner-container"><span class="spinner"></span></div>
+        } @if(contacts.length == 1 ){
+        <div class="actions">
+          <button
+            matButton
+            [routerLink]="['/person', contacts[0].id]"
+            (click)="mergeContacts($index, contacts)"
+          >
+            View
+          </button>
+        </div>
+        } @else {
+        <div class="actions">
+          @if(!loadingGroups()[$index]){<button matButton="" (click)="dismissMerge(contacts)">Dismiss</button>}
+          <button matButton="tonal" (click)="mergeContacts($index, contacts)">Merge</button>
+        </div>
+        }
+      </div>
+      }
+    </div>
+  </div>
+</div>

@@ -1,0 +1,289 @@
+// Include theming for Angular Material with `mat.theme()`.
+// This Sass mixin will define CSS variables that are used for styling Angular Material
+// components according to the Material 3 design spec.
+// Learn more about theming and how to use it for your application's
+// custom components at https://material.angular.dev/guide/theming
+@use '@angular/material' as mat;
+
+html {
+  @include mat.theme(
+    (
+      color: (
+        primary: mat.$azure-palette,
+        tertiary: (
+          primary: #444746,
+        ),
+      ),
+
+      typography: 'Google Sans Text Regular',
+      density: 0,
+    )
+  );
+  @include mat.table-overrides(
+    (
+      row-item-outline-width: 0,
+      background-color: transparent,
+      header-container-height: 50px,
+    )
+  );
+  @include mat.form-field-overrides(
+    (
+      container-height: 38px,
+      container-vertical-padding: 8px,
+    )
+  );
+  @include mat.autocomplete-overrides(
+    (
+      background-color: var(--mat-sys-surface-container-lowest),
+    )
+  );
+}
+button {
+  border: none;
+  background: none;
+  outline: none;
+}
+.mat-mdc-form-field {
+  display: flex !important;
+  margin-bottom: -7px;
+}
+
+.material-symbols-outlined {
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+}
+
+.filled {
+  font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+}
+.mdc-icon-button {
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+body {
+  color-scheme: light;
+  background-color: var(--mat-sys-background);
+  color: var(--mat-sys-on-surface);
+  font: var(--mat-sys-body-medium);
+  font-size: 0.875rem;
+
+  // Reset the user agent margin.
+  margin: 0;
+}
+
+@media (max-width: 900px) {
+  body {
+    background-color: #fff !important;
+  }
+
+  .mat-drawer-container {
+    background-color: unset !important;
+    position: unset !important;
+  }
+  .search-result-cont {
+    top: 70px !important;
+    left: 0 !important;
+    width: 100vw !important;
+    --mat-autocomplete-background-color: transparent !important;
+    height: 100% !important;
+    --mat-autocomplete-container-shape: 0 !important;
+    --mat-autocomplete-container-elevation-shadow: none !important;
+  }
+
+  .search-result-cont .mat-mdc-autocomplete-panel {
+    max-height: calc(100vh - 75px) !important;
+    padding-bottom: 20px !important;
+  }
+}
+
+img {
+  display: block;
+  object-fit: cover;
+  width: 100%;
+}
+.content {
+  overflow-y: auto;
+  max-height: calc(100vh - 116px);
+  padding: 0 20px;
+}
+
+.content .title {
+  font-size: 1.5rem;
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 2rem;
+}
+
+table tr::before {
+  content: '';
+  position: absolute;
+}
+table thead tr::before {
+  bottom: 0px;
+  left: 0;
+  background-color: #c4c7c5;
+  height: 1px;
+  width: 100%;
+}
+
+table tr {
+  position: relative;
+  cursor: pointer;
+}
+
+table tbody tr::before {
+  top: 5px;
+  left: 0;
+  width: 100%;
+  height: calc(100% - 10px);
+  transition: 0.3s ease;
+  border-radius: 5px;
+  background-color: aliceblue;
+  opacity: 0;
+}
+
+tr.selected::before {
+  opacity: 1;
+  background-color: rgba(25, 118, 210, 0.12); /* Material blue tint */
+}
+table tr:hover::before {
+  opacity: 1;
+}
+table .actions-btns {
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  opacity: 0;
+  transition: 0.2s ease;
+}
+table tr:hover .actions-btns {
+  opacity: 1;
+}
+@media (max-width: 1024px) {
+  .mat-sidenav-container .mat-drawer-backdrop ,
+  .mat-sidenav {
+position: fixed !important;
+  }
+  .actions-btns {
+    opacity: 1 !important;
+  }
+}
+table td {
+  z-index: 2;
+  padding-top: 10px !important;
+  padding-bottom: 10px !important;
+  position: relative;
+}
+@media (max-width: 425px) {
+  .mat-drawer-content {
+    position: unset !important;
+  }
+  .content {
+    padding: 0 10px;
+    max-height: 100%;
+  }
+  .content .title {
+    padding-left: 10px;
+  }
+  thead {
+    display: none !important;
+  }
+  table {
+    margin-top: 10px !important;
+  }
+  td {
+    padding: 10px !important;
+  }
+}
+.small-icon {
+  font-size: 20px !important;
+  height: 20px !important;
+  width: 20px !important;
+}
+
+.main-label,
+.mat-mdc-form-field-hint {
+  display: none;
+}
+.tel-form {
+  gap: 10px;
+}
+.mdc-notched-outline.mdc-notched-outline--upgraded
+  .mat-mdc-notch-piece.mdc-notched-outline__leading {
+  border-top-left-radius: 4px !important;
+  border-bottom-left-radius: 4px !important;
+}
+.tel-form .mat-mdc-form-field:first-child .mat-mdc-notch-piece.mdc-notched-outline__trailing {
+  border-top-right-radius: 4px !important;
+  border-bottom-right-radius: 4px !important;
+}
+.mat-mdc-text-field-wrapper {
+  flex: unset !important;
+}
+
+.loader {
+  display: block;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  width: 100%;
+  --c: no-repeat linear-gradient(var(--mat-sys-primary) 0 0);
+  background: var(--c), var(--c), var(--mat-sys-surface-dim);
+  background-size: 60% 100%;
+  animation: l16 3s infinite;
+}
+@keyframes l16 {
+  0% {
+    background-position: -150% 0, -150% 0;
+  }
+  66% {
+    background-position: 250% 0, -150% 0;
+  }
+  100% {
+    background-position: 250% 0, 250% 0;
+  }
+}
+.radios .mdc-form-field {
+  height: 48px;
+  gap: 10px;
+}
+.mat-mdc-menu-panel.menu {
+  --mat-menu-container-color: #fff;
+}
+.menu .menu-item {
+  --mat-menu-item-icon-size: 20px;
+  --mat-menu-item-with-icon-leading-spacing: 20px;
+  --mat-menu-item-label-text-size: 12px;
+  min-height: 35px !important;
+  width: 250px;
+  --mat-menu-item-label-text-color: var(--mat-sys-secondary);
+  --mat-menu-item-icon-color: var(--mat-sys-secondary);
+  text-transform: capitalize;
+}
+.menu .divider {
+  margin: 5px 0;
+  color: var(--mat-sys-shadow);
+  opacity: 0.5;
+}
+.menu .menu-item .mat-icon {
+  font-size: 20px;
+}
+.menu .menu-item .check-icon {
+  font-size: 20px;
+  order: 2;
+  margin: 0;
+  color: var(--mat-sys-primary);
+}
+.info-menu {
+  border-radius: 9px !important;
+  padding: 0px 8px;
+  width: 200px;
+}

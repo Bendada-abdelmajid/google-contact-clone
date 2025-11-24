@@ -1,0 +1,23 @@
+main {
+  padding-top: 64px;
+}
+.main {
+  min-height: calc(100vh - 96px);
+  background-color: #fff;
+  border-radius: 24px;
+  margin: 16px 16px 16px 16px;
+  padding-top: 20px;
+}
+
+@media (max-width: 1024px) {
+  main {
+    --mat-sidenav-container-shape: 0;
+  }
+
+}
+@media (max-width: 900px) {
+  .main{
+      margin: 0  0 16px;
+  }
+
+}

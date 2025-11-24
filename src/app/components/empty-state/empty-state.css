@@ -1,0 +1,17 @@
+.btns{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.content{
+      flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+.content img{
+    width: 250px;
+}

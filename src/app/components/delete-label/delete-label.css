@@ -1,0 +1,13 @@
+.content{
+    overflow: visible;
+    height: auto;
+  
+
+}
+.desc{
+    margin-top: 5px;
+}
+.radios{
+    padding: 20px 6px 15px ;
+    --mat-radio-label-text-size:1rem
+}

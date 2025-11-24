@@ -1,0 +1,142 @@
+.content{
+    display: grid;
+    grid-template-columns: 3fr 4fr;
+    gap: 20px;
+   
+}
+.suggestions {
+    position: sticky;
+    top: 0;
+     padding: 0 10px;
+      display: grid;
+      gap: 20px;
+      height: fit-content;
+
+}
+
+.suggestions .item{
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding-bottom: 10px;
+    padding-top: 10px;
+  padding-right: 20px;
+
+}
+.suggestions .item img{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 80px;
+  width: 80px;
+
+}
+.suggestions .item .img .mat-icon{
+   font-size: 40px;
+   margin: 10px 10px 10px 20px;
+  height: 40px;
+  width: 40px;
+
+}
+.suggestions .item.active{
+    background: var(--mat-sys-primary-container)
+
+
+}
+.result{
+    padding: 0 10px;
+    
+}
+.result .head{
+      position: sticky;
+    top: 0;
+    z-index: 2;
+    background-color: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 20px;
+
+} .result .head h4{
+    font-size: 25px;
+    font-weight: 500;
+}
+.contact-list{
+    display: grid;
+    gap: 15px;
+}
+.duplicate-group{
+    border: 2px solid var(--mat-sys-surface-container);
+    border-radius: 18px;
+    padding: 15px;
+    display: grid;
+    gap: 5px;
+      position: relative;
+      overflow: hidden;
+}
+.duplicate-group.active{
+    background: var(--mat-sys-surface-container);
+}
+.contact-item{
+    padding: 10px ;
+    display: flex;
+transition: .3s ease;
+    gap: 15px;
+     border-radius: 12px;
+     text-decoration: none;
+  
+}
+.contact-item:hover{
+    background: var(--mat-sys-primary-container);
+   
+ 
+}
+.duplicate-group.active .contact-item:hover{
+    background: transparent;
+   
+ 
+}
+.actions{
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+    margin-top: 10px;
+}
+.avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+}
+.spinner-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  position: absolute;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.3);
+  top: 0;
+  left: 0;  
+}
+.spinner {
+    width: 35px;
+    height: 35px;
+    border: 4px solid var(--mat-sys-primary);
+    border-bottom-color: transparent;
+    border-radius: 50%;
+    display: inline-block;
+    box-sizing: border-box;
+    animation: rotation 1s linear infinite;
+    }
+
+    @keyframes rotation {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+    } 

@@ -1,0 +1,46 @@
+<div class="label-cont"> @if(selectedLabels.length> 0){
+<div class="btns">
+  @for (item of selectedLabels; track item.id) {
+  <button matButton="outlined" class="add-label-btn">
+    <mat-icon>label</mat-icon> {{ item?.name }}</button
+  >}
+  <button [matMenuTriggerFor]="menu" matIconButton>
+    <mat-icon class="small-icon">edit</mat-icon>
+  </button>
+</div>
+} @else {
+<button [matMenuTriggerFor]="menu" matButton="outlined" class="add-label-btn">
+  <mat-icon>add</mat-icon> Label
+</button>
+}
+
+<mat-menu #menu="matMenu" class="menu">
+
+  @if ( labelService.labels().length> 0) {
+  <h4 class="label">Manage Labels</h4>
+  @for (item of labelService.labels(); track item.id) {
+  <button mat-menu-item class="menu-item" (click)="saveLabel($event, item)">
+    <mat-icon>label</mat-icon>
+    <p>{{ item.name }}</p>
+    @if (isLabelSelected(item.id)) {
+    <mat-icon class="check-icon">check</mat-icon>
+    }
+  </button>
+  }
+  <hr class="divider" />
+}
+
+
+  @if (showApplyButton()) {
+  <button mat-menu-item class="menu-item" (click)="apply()">
+    <mat-icon class="empty">add</mat-icon>
+    <p>apply</p>
+  </button>
+  } @else {
+  <button mat-menu-item class="menu-item" (click)="addLabel()">
+    <mat-icon>add</mat-icon>
+    <p>Create Label</p>
+  </button>
+  }
+</mat-menu>
+</div>

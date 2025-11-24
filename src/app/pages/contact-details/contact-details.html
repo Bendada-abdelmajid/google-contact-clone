@@ -1,0 +1,242 @@
+@if (contact(); as contact) {
+<div class="content">
+  <div class="nav">
+    <a routerLink="/" matIconButton class="back-btn" type="button">
+      <mat-icon class="small-icon">arrow_back</mat-icon>
+    </a>
+    @if (!contact.deleted) {
+    <button matIconButton class="star-btn" type="button" (click)="toggleFavorite()">
+      <mat-icon class="small-icon" [class.filled]="contact.favorite">star</mat-icon>
+    </button>
+    <a [routerLink]="['/person', contact.id, 'edit']" mat-flat-button type="submit">edit</a>
+    <button matIconButton type="button" (click)="deleteContact()">
+      <mat-icon class="small-icon">delete</mat-icon>
+    </button>
+
+    <button
+      matIconButton
+      [matMenuTriggerFor]="actionsMenu"
+      aria-label="Example icon-button with a menu"
+    >
+      <mat-icon class="small-icon">more_vert</mat-icon>
+    </button>
+
+    <mat-menu #actionsMenu="matMenu">
+      <app-contact-print [contacts]="[contact]" [detailsPage]="true"></app-contact-print> </mat-menu
+    >}
+  </div>
+  <div class="hero">
+    <app-profile-picker
+      [selectedAvatar]="selectedAvatar()"
+      (avatarChange)="avatarChange($event)"
+      [name]="contact.firstName || null"
+    ></app-profile-picker>
+    <h4>{{ contact.firstName || '' }} {{ contact.lastName || '' }}</h4>
+  </div>
+  <div class="action-btns">
+    <hr class="left-devider" />
+    <div class="action-btn">
+      <mat-icon class="small-icon">mail</mat-icon>
+      <span>Email</span>
+    </div>
+    <div class="action-btn">
+      <mat-icon class="small-icon">calendar_today</mat-icon>
+      <span>Schedule</span>
+    </div>
+    <div class="action-btn">
+      <mat-icon class="small-icon">chat_bubble_outline</mat-icon>
+      <span>Chat</span>
+    </div>
+    <div class="action-btn">
+      <mat-icon class="small-icon">videocam</mat-icon>
+      <span>Video</span>
+    </div>
+    <hr />
+  </div>
+  <div class="body">
+    <div>
+      @if (contact && contact.deleted) {
+      <div class="delete-box">
+        <h4>Why in Trash?</h4>
+        <p>Deleted in Google Contacts (web)</p>
+        <p>Delete at : {{ contact!.getDeletedDate() }}</p>
+        <p>{{ contact!.getRemainingDeleteDays() }} day(s) left before permanent deletion</p>
+        <div class="actions">
+          <button matButton (click)="contactService.permanentlyDelete(contact.id)">
+            Delete forever
+          </button>
+          <button matButton (click)="contactService.recoverContact(contact.id)">Recover</button>
+        </div>
+      </div>
+      }
+      <div class="details">
+        <h4>Contact details</h4>
+
+        <!-- Job Title / Company -->
+        @if (contact.jobTitle || contact.company) {
+        <div class="item">
+          <mat-icon>work</mat-icon>
+          <div>
+            <p>{{ contact.jobTitle }}</p>
+            <span> at {{ contact.company }}</span>
+          </div>
+        </div>
+        }
+
+        <!-- Emails -->
+        @if (contact.emails?.length) {
+        <div class="item">
+          <mat-icon>mail</mat-icon>
+          @for (item of contact.emails; track $index) {
+          <div>
+            <p>{{ item.value }}</p>
+            @if(item.label){<span> • {{ item.label }}</span
+            >}
+          </div>
+          }
+        </div>
+        } @else if (!contact.deleted && !contact.hidden) {
+        <div class="item">
+          <mat-icon>mail</mat-icon>
+          <button [routerLink]="['/person', contact.id, 'edit']" class="add-btn">add email</button>
+        </div>
+        }
+
+        <!-- Phones -->
+        @if (contact.phones?.length) {
+        <div class="item">
+          <mat-icon>call</mat-icon>
+          @for (item of contact.phones; track $index) {
+          <div>
+            <p>{{ item.value }}</p>
+            @if(item.label){<span> • {{ item.label }}</span
+            >}
+          </div>
+          }
+        </div>
+        } @else if (!contact.deleted && !contact.hidden) {
+        <div class="item">
+          <mat-icon>call</mat-icon>
+          <button [routerLink]="['/person', contact.id, 'edit']" class="add-btn">Add phone</button>
+        </div>
+        }
+
+        <!-- Addresses -->
+        @if (contact.addresses?.length) {
+        <div class="item">
+          <mat-icon>location_on</mat-icon>
+          @for (item of contact.addresses; track $index) {
+          <div>
+            <p>{{ item.city }}</p>
+            @if(item.label){<span> • {{ item.label }}</span
+            >}
+          </div>
+          }
+        </div>
+        } @else if (!contact.deleted && !contact.hidden) {
+        <div class="item">
+          <mat-icon>location_on</mat-icon>
+          <button [routerLink]="['/person', contact.id, 'edit']" class="add-btn">
+            Add address
+          </button>
+        </div>
+        }
+
+        <!-- Birthday -->
+        @if (contact.birthday) {
+        <div class="item">
+          <mat-icon>cake</mat-icon>
+          <div>
+            <p>{{ contact.birthday }}</p>
+            <span>Birthday</span>
+          </div>
+        </div>
+        } @else if (!contact.deleted && !contact.hidden) {
+        <div class="item">
+          <mat-icon>cake</mat-icon>
+          <button [routerLink]="['/person', contact.id, 'edit']" class="add-btn">
+            Add birthday
+          </button>
+        </div>
+        }
+
+        <!-- Note -->
+        @if (contact.note) {
+        <div class="item">
+          <mat-icon>note</mat-icon>
+          <div>
+            <p>{{ contact.note }}</p>
+            <span>Note</span>
+          </div>
+        </div>
+        } @else if (!contact.deleted) {
+        <div class="item">
+          <mat-icon>note</mat-icon>
+          <button [routerLink]="['/person', contact.id, 'edit']" class="add-btn">Add note</button>
+        </div>
+        }
+      </div>
+    </div>
+    <div>
+      @if(duplicatesForCurrent().length > 0) {
+      <div class="duplicate-group">
+        <h4>Merge & fix</h4>
+        <p>Merge duplicate</p>
+        @for (item of duplicatesForCurrent(); track item.id) {
+        <a [routerLink]="['/person', item.id]" class="contact-item">
+          <div class="avatar-cont">
+            @if(item.photoUrl){
+            <img class="avatar" [src]="item.photoUrl" alt="" />
+            }@else {
+            <span
+              class="avatar"
+              [style]="{
+                'background-color': item.stringToColor()
+              }"
+            >
+              {{ item.getInitials() }}</span
+            >
+            }
+          </div>
+          <div class="contact-info">
+            <h4 class="name">{{ item.getFullName() }}</h4>
+            @if(item.emails){ @for (item of item.emails; track $index) {
+            <p>
+              <span>{{ item.value }}</span>
+              @if(item.label){<span> • {{ item.label }}</span
+              >}
+            </p>
+            } } @if(item.phones){ @for (item of item.phones; track $index) {
+            <p>
+              <span>{{ item.value }}</span>
+              @if(item.label){<span> • {{ item.label }}</span
+              >}
+            </p>
+            } }
+          </div>
+        </a>
+        } @if(loading()){
+        <div class="spinner-container"><span class="spinner"></span></div>
+        }
+
+        <div class="actions">
+          @if(!loading()){<button matButton="" (click)="dismissMerge(duplicatesForCurrent())">
+            Dismiss</button
+          >}
+          <button matButton="tonal" (click)="mergeContacts()">Merge</button>
+        </div>
+      </div>}
+
+      <div class="hestory">
+        <h4>History</h4>
+        <p>
+          Last edited • <span>{{ contact.getLastEdited() }}</span>
+        </p>
+        <p>
+          Added to contacts • <span>{{ contact.getAddedDate() }}</span>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+}

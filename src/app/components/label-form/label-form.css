@@ -1,0 +1,9 @@
+.content{
+    overflow: visible;
+    height: auto;
+
+}
+.field{
+    --mat-form-field-container-height: 56px;
+  --mat-form-field-container-vertical-padding: 16px;
+}

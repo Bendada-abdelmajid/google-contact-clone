@@ -1,0 +1,46 @@
+<div class="header-cont" [class.show-search]="showSearch()">
+  <mat-toolbar class="header">
+    <div class="left">
+      <button matIconButton (click)="toggleSidebar()">
+        <mat-icon>menu</mat-icon>
+      </button>
+      <div class="logo">
+        <img
+          src="https://www.gstatic.com/images/branding/product/2x/contacts_2022_48dp.png"
+          width="40"
+          height="40"
+          alt=""
+        />
+        <span>Contacts</span>
+      </div>
+    </div>
+    <div class="right">
+      <div class="search-cont" (click)="toogelShowSearch()">
+        <span class="placehoder">Search</span>
+      </div>
+      <button matIconButton class="close-search" (click)="toogelShowSearch()">
+        <mat-icon class="small-icon">west</mat-icon>
+      </button>
+      <app-search class="search"></app-search>
+
+      <div class="btns">
+        <button matIconButton class="search-btn">
+          <mat-icon>search</mat-icon>
+        </button>
+        <button
+          matIconButton
+          class="example-icon favorite-icon"
+          aria-label="Example icon-button with heart icon"
+        >
+          <mat-icon>help</mat-icon>
+        </button>
+        <button matIconButton class="" aria-label="Example icon-button with share icon">
+          <mat-icon>settings</mat-icon>
+        </button>
+      </div>
+      <div class="avatar">
+        <img src="avatar.png" alt="" />
+      </div>
+    </div>
+  </mat-toolbar>
+</div>

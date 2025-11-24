@@ -1,0 +1,261 @@
+.content{
+  overflow-x: hidden;
+
+}
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 10px 20px;
+  width: 100%;
+  position: sticky;
+  z-index: 10;
+  background-color: #fff;
+  top: 0;
+}
+.nav .back-btn {
+  margin-right: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero {
+  display: flex;
+  align-items: center;
+  padding: 10px 30px;
+  gap: 30px;
+}
+.hero h4 {
+  font-size: 1.75rem;
+  font-weight: 400;
+}
+.action-btns {
+  padding: 30px 30px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+.action-btns .action-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--mat-sys-surface-container-high);
+  position: relative;
+}
+.action-btns .mat-icon {
+  color: var(--mat-sys-outline);
+}
+.action-btns .action-btn span {
+  position: absolute;
+  bottom: -20px;
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.00625rem;
+  text-align: center;
+}
+.action-btns hr {
+  opacity: 0.8;
+  flex: 1;
+  border-color: var(--mat-sys-surface-container-high);
+}
+.left-devider{
+  display: none;
+}
+.empty {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.body {
+  display: grid;
+  grid-template-columns: 3fr 2fr;
+  gap: 20px;
+  padding: 20px 30px;
+}
+.details {
+  padding: 20px;
+  border-radius: 15px;
+  display: grid;
+  gap: 15px;
+  background: var(--mat-sys-background);
+}
+
+.body h4 {
+  font-size: 18px;
+  font-weight: 400;
+  margin-bottom: 10px;
+}
+.item {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+.item div {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.item span {
+  font-size: 12px;
+  text-transform: capitalize;
+}
+.item .mat-icon {
+  font-size: 20px;
+  width: 20px;
+  height: 20px;
+  opacity: 0.8;
+}
+
+.hestory {
+  padding: 20px;
+  height: fit-content;
+  display: grid;
+  gap: 5px;
+}
+.hestory p span {
+  font-size: 12px;
+  opacity: 0.8;
+}
+.add-btn {
+  color: var(--mat-sys-primary);
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+.add-btn:hover {
+  text-decoration: underline;
+}
+
+.delete-box{
+padding: 20px 20px 10px;
+  border-radius: 15px;
+  background: var(--mat-sys-surface-container-high);
+  margin-bottom: 15px;
+  
+}
+
+.delete-box .actions{
+justify-content: flex-end;
+display: flex;
+justify-items: center;
+margin-top: 10px;
+  
+}
+.duplicate-group{
+    border: 1px solid var(--mat-sys-surface-container);
+    border-radius: 18px;
+    height: fit-content;
+    padding: 15px;
+    display: grid;
+    gap: 5px;
+      position: relative;
+      overflow: hidden;
+}
+.duplicate-group.active{
+    background: var(--mat-sys-surface-container);
+}
+.contact-item{
+    padding: 10px ;
+    display: flex;
+transition: .3s ease;
+    gap: 15px;
+     border-radius: 12px;
+     text-decoration: none;
+  
+}
+.contact-item:hover{
+    background: var(--mat-sys-primary-container);
+   
+ 
+}
+.duplicate-group.active .contact-item:hover{
+    background: transparent;
+   
+ 
+}
+.actions{
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+    margin-top: 10px;
+}
+.avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+}
+.spinner-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  position: absolute;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.3);
+  top: 0;
+  left: 0;  
+}
+.spinner {
+    width: 35px;
+    height: 35px;
+    border: 4px solid var(--mat-sys-primary);
+    border-bottom-color: transparent;
+    border-radius: 50%;
+    display: inline-block;
+    box-sizing: border-box;
+    animation: rotation 1s linear infinite;
+    }
+
+    @keyframes rotation {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+    } 
+@media (max-width: 900px) {
+  .body {
+  grid-template-columns: 1fr;
+  }
+}
+@media (max-width: 425px) {
+  .content{
+position: absolute;
+    top: 0px;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    padding: 0 10px 10px;
+    background-color: var(--mat-sys-on-primary);
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden auto;
+   
+  }
+  .nav{
+    padding:  0;
+    margin-top: 10px;
+    height: 70px;
+  }
+  .hero {
+ flex-direction: column;
+padding: 20px 0;}
+.action-btns {
+  padding: 30px 10px;
+
+}
+.left-devider{
+  display: block;
+}
+  .body {
+    padding: 20px 0;
+  }
+}

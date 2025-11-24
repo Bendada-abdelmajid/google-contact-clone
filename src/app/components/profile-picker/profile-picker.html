@@ -1,0 +1,52 @@
+<div class="avatars-cont" [class.menu-open]="showMenu()">
+  <div class="avatar">
+    @if(selectedAvatar){
+    <img [src]="selectedAvatar" alt="User avatar" />
+    } @else if(name) {
+    <span
+    
+      [style]="{
+        'background-color': stringToColor(name)
+      }"
+    >
+      {{ name[0] }}</span
+    >
+
+    } @else {
+    <img [src]="selectedAvatar || defaultAvatar" alt="User avatar" />
+    }
+
+    <button matIconButton class="add-btn" (click)="toogleMenu(true)"><mat-icon>add</mat-icon></button>
+  </div>
+  <div class="overlay" (click)="toogleMenu(false)"></div>
+  <div class="avatars-wraper" [class.show]="showMore()">
+    <div class="avatars-content">
+      <h4>Choose a picture</h4>
+      <button (click)="toogleShowMore(false)" matMiniFab class="left-btn navigate-btn">
+        <mat-icon class="small-icon">keyboard_arrow_left</mat-icon>
+      </button>
+      <button (click)="toogleShowMore(true)" matMiniFab class="right-btn navigate-btn">
+        <mat-icon class="small-icon">keyboard_arrow_right</mat-icon>
+      </button>
+      <div class="avatars-list">
+        <div class="avatars-list-content">
+          @for (avatar of avatars(); track avatar.id) {
+          <div
+            class="avatar-item"
+            [class.selected]="selectedAvatar === avatar.src.medium"
+            (click)=" chooseAvatar(avatar.src.medium)"
+          >
+            <img [src]="avatar.src.medium" alt="Avatar" />
+          </div>
+          }
+          <button mat-button class="more-btn">More</button>
+        </div>
+      </div>
+      <div class="btns">
+        <button matButton>Google photos</button>
+        <button matButton>Upload</button>
+      </div>
+    </div>
+  </div>
+</div>
+

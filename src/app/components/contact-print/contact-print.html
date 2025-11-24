@@ -1,0 +1,21 @@
+@if (contacts) {
+<button class="menu-item" (click)="export()" mat-menu-item>
+  <mat-icon>upload</mat-icon>
+  <span>export</span>
+</button>
+<button class="menu-item" (click)="print()" mat-menu-item>
+  <mat-icon>print</mat-icon>
+  <span>print</span>
+</button>
+
+<button class="menu-item" (click)="toggleHidden()" mat-menu-item>
+  <mat-icon>{{ contacts[0]?.hidden ? 'person_add' : 'archive' }}</mat-icon>
+  <span>{{  contacts[0]?.hidden  ? 'Save Contacts' : 'Hide from Contacts' }}</span>
+</button>
+@if (!detailsPage) {
+<button class="menu-item"  mat-menu-item (click)="deleteAll()">
+  <mat-icon class="small-icon">delete</mat-icon>
+  <span>Delete {{contacts.length > 1 ? 'contacts' : 'contact'}}</span>
+</button>
+}
+}

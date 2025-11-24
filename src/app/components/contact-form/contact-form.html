@@ -1,0 +1,252 @@
+@if(isLoading){
+<div class="loader"></div>
+}
+
+<form [formGroup]="contactForm" class="contact-form">
+  <div class="nav">
+    <a routerLink="/" matIconButton class="back-btn" type="button">
+      <mat-icon class="small-icon">arrow_back</mat-icon>
+    </a>
+    <button matIconButton class="star-btn" type="button" (click)="toggleFavorite()">
+      <mat-icon class="small-icon" [class.filled]="isFavorite">star</mat-icon>
+    </button>
+    <button
+      (click)="onSubmit()"
+      [disabled]="!hasAtLeastOneField || contactForm.invalid || submitted"
+      mat-flat-button
+      type="submit"
+      class="save-btn"
+    >
+      Save
+    </button>
+  </div>
+  <div class="contact-form-content">
+    <div class="hero">
+    <app-profile-picker
+      [name]="contact ? contact.getInitials() : null"
+      [selectedAvatar]="selectedAvatar()"
+      (avatarChange)="avatarChange($event)"
+    ></app-profile-picker>
+   
+
+
+    <app-label-selector 
+  [selectedLabels]="contactLabels()"
+  (onApply)="handleLabelApply($event)">
+</app-label-selector></div>
+    <!-- Basic Info -->
+
+    <div class="section">
+      <mat-icon class="section-icon">person_outline</mat-icon>
+      <div>
+        <mat-form-field appearance="outline">
+          <mat-label>First Name</mat-label>
+          <input matInput formControlName="firstName" />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Last Name</mat-label>
+          <input matInput formControlName="lastName" />
+        </mat-form-field>
+        @if(showProfileInfo()){
+        <mat-form-field appearance="outline">
+          <mat-label>Nickname</mat-label>
+          <input matInput formControlName="nickName" />
+        </mat-form-field>
+
+        }
+      </div>
+      <button type="button" class="arrow-btn" matIconButton (click)="toogleShowProfileInfo()">
+        <mat-icon class="small-icon">keyboard_arrow_down</mat-icon>
+      </button>
+    </div>
+    <div class="section">
+      <mat-icon class="section-icon">domain</mat-icon>
+      <div>
+        <mat-form-field appearance="outline">
+          <mat-label>Job Title</mat-label>
+          <input matInput formControlName="jobTitle" />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Company</mat-label>
+          <input matInput formControlName="company" />
+        </mat-form-field>
+      </div>
+    </div>
+
+    <!-- Phones -->
+    @if(phones.controls.length > 0 ){
+    <div class="section phone-section">
+      <mat-icon class="section-icon">phone_outline</mat-icon>
+      <div>
+        <div formArrayName="phones">
+          @for (item of phones.controls; track $index) {
+          <div [formGroupName]="$index" class="item phone-filed flex-filed">
+            @if (isBrowser) {
+            <ngx-material-intl-tel-input
+              appearance="outline"
+              [fieldControlName]="'value'"
+              [required]="true"
+              [autoIpLookup]="false"
+              [hidePhoneIcon]="true"
+            >
+            </ngx-material-intl-tel-input>
+            } @if(item.get('value')?.value != ""){
+            <mat-form-field appearance="outline">
+              <mat-label>Label</mat-label>
+              <input matInput formControlName="label" />
+            </mat-form-field>
+            }
+            <button mat-icon-button class="remove-btn" type="button" (click)="removePhone($index)">
+              <mat-icon class="small-icon">close</mat-icon>
+            </button>
+          </div>
+          }
+        </div>
+
+        <button matButton="tonal" class="add-filed-btn" type="button" (click)="addPhone()">
+          <mat-icon>add</mat-icon> Add Email
+        </button>
+      </div>
+    </div>
+    } @else {
+    <button matButton="tonal" class="add-filed-btn new-filed" type="button" (click)="addPhone()">
+      <mat-icon>phone_outline</mat-icon> Add phone
+    </button>
+
+    }
+
+    <!-- Emails -->
+    @if(emails.controls.length > 0 ){
+    <div class="section">
+      <mat-icon class="section-icon">mail_outline</mat-icon>
+      <div>
+        <div formArrayName="emails">
+          @for (item of emails.controls; track $index) {
+          <div [formGroupName]="$index" class="item flex-filed">
+            <mat-form-field appearance="outline" style="width: 100%">
+              <mat-label>Email</mat-label>
+              <input matInput formControlName="value" type="email" />
+            </mat-form-field>
+            @if(item.get('value')?.value != ""){
+            <mat-form-field appearance="outline">
+              <mat-label>Label</mat-label>
+              <input matInput formControlName="label" />
+            </mat-form-field>
+
+            }
+            <button mat-icon-button class="remove-btn" type="button" (click)="removeEmail($index)">
+              <mat-icon class="small-icon">close</mat-icon>
+            </button>
+          </div>
+          }
+        </div>
+
+        <button matButton="tonal" class="add-filed-btn" type="button" (click)="addEmail()">
+          <mat-icon>add</mat-icon> Add Email
+        </button>
+      </div>
+    </div>
+    }@else {
+
+    <button matButton="tonal" class="add-filed-btn new-filed" type="button" (click)="addEmail()">
+      <mat-icon>mail</mat-icon> Add email
+    </button>
+
+    }
+
+    <!-- Address -->
+    @if(addresses.controls ){
+    <div class="section">
+      <mat-icon class="section-icon">location_on_outline</mat-icon>
+      <div>
+        <div formArrayName="addresses" class="item">
+          @for (item of addresses.controls; track $index) {
+          <div [formGroupName]="$index" id="address-{{ $index }}">
+            <mat-form-field appearance="outline"
+              ><mat-label>Country / Region</mat-label><input matInput formControlName="country"
+            /></mat-form-field>
+            <mat-form-field appearance="outline"
+              ><mat-label>Street Address</mat-label><input matInput formControlName="street"
+            /></mat-form-field>
+            <mat-form-field appearance="outline"
+              ><mat-label>Street Address Line 2</mat-label
+              ><input matInput formControlName="streetLine2"
+            /></mat-form-field>
+            <mat-form-field appearance="outline"
+              ><mat-label>Postal Code</mat-label><input matInput formControlName="postalCode"
+            /></mat-form-field>
+            <mat-form-field appearance="outline"
+              ><mat-label>City</mat-label><input matInput formControlName="city"
+            /></mat-form-field>
+            <mat-form-field appearance="outline"
+              ><mat-label>PO Box</mat-label><input matInput formControlName="poBox"
+            /></mat-form-field>
+            <mat-form-field appearance="outline"
+              ><mat-label>Label</mat-label><input matInput formControlName="label"
+            /></mat-form-field>
+            <button
+              mat-icon-button
+              class="remove-btn"
+              type="button"
+              (click)="removeAddress($index)"
+            >
+              <mat-icon class="small-icon">close</mat-icon>
+            </button>
+          </div>
+          }
+        </div>
+
+        <button matButton="tonal" class="add-filed-btn" type="button" (click)="addAddress()">
+          <mat-icon>add</mat-icon> Add Address
+        </button>
+      </div>
+    </div>
+    }@else {
+    <button matButton="tonal" class="add-filed-btn new-filed" type="button" (click)="addAddress()">
+      <mat-icon>location_on_outline</mat-icon> Add address
+    </button>
+
+    }
+    <!-- Birthday -->
+    <div class="section">
+      <mat-icon class="section-icon">cake</mat-icon>
+      <div class="date-picker">
+        <mat-form-field appearance="outline">
+          <mat-label>Month</mat-label>
+          <mat-select formControlName="month" appearance="outline">
+            <mat-option value="01">January</mat-option>
+            <mat-option value="02">February</mat-option>
+            <mat-option value="03">March</mat-option>
+            <mat-option value="04">April</mat-option>
+            <mat-option value="05">May</mat-option>
+            <mat-option value="06">June</mat-option>
+            <mat-option value="07">July</mat-option>
+            <mat-option value="08">August</mat-option>
+            <mat-option value="09">September</mat-option>
+            <mat-option value="10">October</mat-option>
+            <mat-option value="11">November</mat-option>
+            <mat-option value="12">December</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Day</mat-label>
+          <input matInput formControlName="day" type="number" max="31" />
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Year (Optional)</mat-label>
+          <input matInput formControlName="year" type="number" />
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="section">
+      <mat-icon class="section-icon">note</mat-icon>
+      <mat-form-field appearance="outline"
+        ><mat-label>Notes</mat-label>
+        <textarea matInput formControlName="note" class="note"> </textarea>
+      </mat-form-field>
+    </div>
+    <button matButton class="show-more-btn">Show more</button>
+  </div>
+</form>

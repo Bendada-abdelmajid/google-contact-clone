@@ -1,0 +1,123 @@
+.sidenav {
+  padding-top: 20px ;
+  border-radius: none;
+}
+.logo {
+
+  display: none;
+  align-items: center;
+  gap: 10px;
+  margin: 0 0 20px 15px;
+}
+.logo span{
+  font-family: var(--mat-toolbar-title-text-font,var(--mat-sys-title-large-font) );
+  font-size: var(--mat-toolbar-title-text-size, var(--mat-sys-title-large-size));
+  line-height: var(--mat-toolbar-title-text-line-height, var(--mat-sys-title-large-line-height));
+  font-weight: var(--mat-toolbar-title-text-weight, var(--mat-sys-title-large-weight));
+  letter-spacing: var(--mat-toolbar-title-text-tracking, var(--mat-sys-title-large-tracking));
+}
+.logo img {
+  width: 40px;
+  height: 40px;
+}
+.add-btn {
+  border-radius: 15px;
+  box-shadow: none;
+  padding: 10px 25px 10px 20px;
+  width: fit-content;
+  gap: 9px;
+  font-size: 16px;
+  margin-bottom: 5px;
+  margin-left: 12px;
+}
+
+a {
+  font-size: .875rem;;
+  width: 100%;
+  text-decoration: none;
+  gap: 10px;
+  display: flex;
+  color: #444746;
+  align-items: center;
+  justify-content: flex-start;
+  --mat-icon-color:#444746;
+}
+.active {
+  background: var(--mat-sys-secondary-container);
+}
+.label-cont{
+    display: flex;
+  height: 60px;
+align-items: center;
+  justify-content: space-between;
+  margin-left: 16px;
+}
+.label {
+  font-size: 16px;
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 500;
+  letter-spacing: 0;
+  line-height: 1.25rem;
+  color: var(--gm3-sys-color-on-surface-variant, #444746);
+  font-weight: 700;
+}
+
+.list {
+    --mat-list-list-item-one-line-container-height:44px;
+   max-height: calc(100vh - 146px);
+  overflow-y: auto;
+  padding: 12px 12px 20px;
+}
+.count{
+ margin-left: auto;
+ font-size: .75rem;
+}
+
+.label-item{
+   display: flex;
+  align-items: center;
+  gap: 2px;
+}
+.btns{
+  position: absolute;
+  top: 50%;
+  right: 2px;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  transition:.3s cubic-bezier(0.075, 0.82, 0.165, 1) opacity ;
+ opacity: 0;
+}
+.label-item:hover .count{
+  opacity: 0;
+}
+.label-item:hover .btns{
+  opacity: 1;
+}
+.other-btn{
+    padding-right: 2px;
+}
+.info{
+  margin: 6px ;
+}
+.duplicate-contacts{
+ margin-left: auto;
+  background: var(--mat-sys-error);
+  color: var(--mat-sys-on-error);
+  font-size: var(--mat-sys-label-medium-size);
+  font-weight: 500;
+  border-radius: 13px;
+  padding: 0px 12px;
+  display: block;
+  height: fit-content;
+}
+@media (max-width:1024px) {
+  .logo{
+    display: flex;
+  }
+  .add-btn{
+    display: none;
+  }
+}

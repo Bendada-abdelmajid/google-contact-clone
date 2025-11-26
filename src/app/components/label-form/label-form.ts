@@ -39,7 +39,7 @@ export class LabelForm {
     private snackBar: MatSnackBar
   ) {
 
-    if (data.name) {
+    if (data && data.name) {
       this.title.set('Rename label');
       this.name.set(data.name);
       this.update.set(true);

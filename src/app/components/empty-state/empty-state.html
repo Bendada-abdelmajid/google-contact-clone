@@ -5,11 +5,11 @@
   />
   <p>No contacts yet</p>
   <div class="btns">
-    <a routerLink="/" matButton="">
+    <a routerLink="/new" matButton="">
       <mat-icon>person_outline</mat-icon>
       <span>Create Contact</span></a
     >
-    <button matButton="">
+    <button matButton="" (click)="import()">
       <mat-icon>file_download</mat-icon>
       <span>import Contacts</span>
     </button>

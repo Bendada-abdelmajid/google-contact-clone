@@ -44,7 +44,13 @@ export class SidebarComponent {
   }
  
   openDialog() {
-    this.dialog.open(LabelForm, {});
+    try {
+       this.dialog.open(LabelForm, {data: {}});
+    } catch (error) {
+      console.error('Error opening dialog:', error);
+    }
+   
+
   }
   updateLabel(name: string, id: string) {
     // alert(name);

@@ -1,117 +1,122 @@
 <div class="content">
-     <div class="note">
+  <div class="note">
     <p>Contacts that have been in Trash more than 30 days will be deleted forever</p>
-     <button matButton (click)="delete(contactService.deletedContacts(), 'empty-trash')">
-        Empty trash Now
-      </button>
+    <button (click)="delete(contactService.deletedContacts(), 'empty-trash')">
+      Empty trash Now
+    </button>
   </div>
   <h1 class="title">
     Trash <sup>({{ contactService.deletedContacts().length }})</sup>
   </h1>
- 
-  <div class="actions-head head" [class.hide]="selectedContacts().length == 0">
-    <p class="select-all-btn" [matMenuTriggerFor]="menu">
-      <button matIconButton>
-        <span class="select-all-span">
-          @if(selectedContacts().length == contactService.deletedContacts().length){
-          <mat-icon>check_indeterminate_small</mat-icon>
-          } @else {
-          <mat-icon>check_indeterminate_small</mat-icon>
-          }
-        </span>
-      </button>
-      <mat-icon>arrow_drop_down</mat-icon>
-    </p>
-    <p>{{ selectedContacts().length }} selected</p>
-
-    <mat-menu #menu="matMenu">
-      <button mat-menu-item (click)="selectAll()">
-        <span>All</span>
-      </button>
-      <button mat-menu-item (click)="deselectAll()">
-        <span>None</span>
-      </button>
-    </mat-menu>
-
-    <div class="btns">
-      <button matButton (click)="delete(selectedContacts(), 'delete-forever')">
-       Delete forever
-      </button>
-      <button matButton (click)="recover(selectedContacts())">
-       Recover
-      </button>
-    </div>
-  </div>
-  <table mat-table [dataSource]="contactService.deletedContacts()" class="mat-elevation-z0">
-    <!-- Name -->
-    <ng-container matColumnDef="name">
-      <th mat-header-cell *matHeaderCellDef>Name</th>
-      <td mat-cell *matCellDef="let contact">
-        <p class="name-field">
-          <span class="checkbox-cont">
-            @if(contact.photoUrl){
-            <img class="avatar" [src]="contact.photoUrl" alt="" />
-            }@else {
-            <span
-              class="avatar"
-              [style]="{
-                'background-color': contact.stringToColor()
-              }"
-            >
-              {{ contact.getInitials() }}</span
-            >
+  @if (contactService.deletedContacts().length > 0) {
+  <div>
+    <div class="actions-head head" [class.hide]="selectedContacts().length == 0">
+      <p class="select-all-btn" [matMenuTriggerFor]="menu">
+        <button matIconButton>
+          <span class="select-all-span">
+            @if(selectedContacts().length == contactService.deletedContacts().length){
+            <mat-icon>check_indeterminate_small</mat-icon>
+            } @else {
+            <mat-icon>check_indeterminate_small</mat-icon>
             }
-            <!-- <span class="avatar"> {{ contact.name[0] }}</span> -->
-            <mat-checkbox
-              (click)="$event.stopPropagation()"
-              (change)="toggleSelection(contact)"
-              [checked]="isSelected(contact)"
-              class="checkbox"
-            />
           </span>
-          <a [routerLink]="['/person', contact.id]"
-            >{{ contact.firstName || '' }} {{ contact.lastName || '' }}</a
-          >
-        </p>
-      </td>
-    </ng-container>
+        </button>
+        <mat-icon>arrow_drop_down</mat-icon>
+      </p>
+      <p>{{ selectedContacts().length }} selected</p>
 
-    <!-- Phone -->
-    <ng-container matColumnDef="phone">
-      <th mat-header-cell *matHeaderCellDef>Phone</th>
-      <td mat-cell *matCellDef="let contact">
-        {{ contact.getPhone() }}
-      </td>
-    </ng-container>
-    <ng-container matColumnDef="deleted-date">
-      <th mat-header-cell *matHeaderCellDef>Date deleted</th>
-      <td mat-cell *matCellDef="let contact">
-        {{ contact.getDeletedDate() }}
-      </td>
-    </ng-container>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item (click)="selectAll()">
+          <span>All</span>
+        </button>
+        <button mat-menu-item (click)="deselectAll()">
+          <span>None</span>
+        </button>
+      </mat-menu>
 
-    <!-- Actions -->
-    <ng-container matColumnDef="actions">
-      <th mat-header-cell *matHeaderCellDef></th>
-      <td mat-cell *matCellDef="let contact">
-        <span class="actions-btns">
-          <button (click)="recover([contact])" matButton aria-label="recover contact">Recover</button>
-        </span>
-      </td>
-    </ng-container>
+      <div class="btns">
+        <button matButton (click)="delete(selectedContacts(), 'delete-forever')">
+          Delete forever
+        </button>
+        <button matButton (click)="recover(selectedContacts())">Recover</button>
+      </div>
+    </div>
+    <table mat-table [dataSource]="contactService.deletedContacts()" class="mat-elevation-z0">
+      <!-- Name -->
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef>Name</th>
+        <td mat-cell *matCellDef="let contact">
+          <p class="name-field">
+            <span class="checkbox-cont">
+              @if(contact.photoUrl){
+              <img class="avatar" [src]="contact.photoUrl" alt="" />
+              }@else {
+              <span
+                class="avatar"
+                [style]="{
+                  'background-color': contact.stringToColor()
+                }"
+              >
+                {{ contact.getInitials() }}</span
+              >
+              }
+              <!-- <span class="avatar"> {{ contact.name[0] }}</span> -->
+              <mat-checkbox
+                (click)="$event.stopPropagation()"
+                (change)="toggleSelection(contact)"
+                [checked]="isSelected(contact)"
+                class="checkbox"
+              />
+            </span>
+            <a [routerLink]="['/person', contact.id]"
+              >{{ contact.firstName || '' }} {{ contact.lastName || '' }}</a
+            >
+          </p>
+        </td>
+      </ng-container>
 
-    <tr
-      class="head"
-      [class.hide]="selectedContacts().length > 0"
-      mat-header-row
-      *matHeaderRowDef="displayedColumns"
-    ></tr>
+      <!-- Phone -->
+      <ng-container matColumnDef="phone">
+        <th mat-header-cell class="col-desktop" *matHeaderCellDef>Phone</th>
+        <td mat-cell class="col-desktop" *matCellDef="let contact">
+          {{ contact.getPhone() }}
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="deleted-date">
+        <th mat-header-cell class="col-desktop" *matHeaderCellDef>Date deleted</th>
+        <td mat-cell class="col-date" *matCellDef="let contact">
+          {{ contact.getDeletedDate() }}
+        </td>
+      </ng-container>
 
-    <tr
-      tabindex="1"
-      mat-row
-      *matRowDef="let row; columns: displayedColumns"
-      [class.selected]="isSelected(row)"
-    ></tr>
-  </table>
+      <!-- Actions -->
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef></th>
+        <td mat-cell class="col-tablet" *matCellDef="let contact">
+          <span class="actions-btns">
+            <button (click)="recover([contact])" matButton aria-label="recover contact">
+              Recover
+            </button>
+          </span>
+        </td>
+      </ng-container>
+
+      <tr
+        class="head"
+        [class.hide]="selectedContacts().length > 0"
+        mat-header-row
+        *matHeaderRowDef="displayedColumns"
+      ></tr>
+
+      <tr
+        tabindex="1"
+        mat-row
+        *matRowDef="let row; columns: displayedColumns"
+        [class.selected]="isSelected(row)"
+      ></tr>
+    </table>
+  </div>
+  }@else {
+  <p style="margin-top: 30px;">No contacts in Trash</p>
+  }
 </div>

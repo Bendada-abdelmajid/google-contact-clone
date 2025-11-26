@@ -22,18 +22,15 @@
   </div>
   <div class="contact-form-content">
     <div class="hero">
-    <app-profile-picker
-      [name]="contact ? contact.getInitials() : null"
-      [selectedAvatar]="selectedAvatar()"
-      (avatarChange)="avatarChange($event)"
-    ></app-profile-picker>
-   
+      <app-profile-picker
+        [name]="contact ? contact.getInitials() : null"
+        [selectedAvatar]="selectedAvatar()"
+        (avatarChange)="avatarChange($event)"
+      ></app-profile-picker>
 
-
-    <app-label-selector 
-  [selectedLabels]="contactLabels()"
-  (onApply)="handleLabelApply($event)">
-</app-label-selector></div>
+      <app-label-selector [selectedLabels]="contactLabels()" (onApply)="handleLabelApply($event)">
+      </app-label-selector>
+    </div>
     <!-- Basic Info -->
 
     <div class="section">
@@ -90,8 +87,16 @@
               [required]="true"
               [autoIpLookup]="false"
               [hidePhoneIcon]="true"
+            />
+
+            <!-- <ngx-material-intl-tel-input
+              appearance="outline"
+              [fieldControlName]="'value'"
+              [required]="true"
+              [autoIpLookup]="false"
+              [hidePhoneIcon]="true"
             >
-            </ngx-material-intl-tel-input>
+            </ngx-material-intl-tel-input> -->
             } @if(item.get('value')?.value != ""){
             <mat-form-field appearance="outline">
               <mat-label>Label</mat-label>

@@ -2,14 +2,22 @@
 .note{
  background-color: var(--mat-sys-surface-container);
   color: var(--mat-sys-on-surface);
-  padding: 6px 10px 6px 20px;
+  padding: 15px;
   display: flex;
   align-items: center;
-  gap: 20px;
-  border-radius: 4px;
+  gap:10px 20px ;
+  flex-wrap: wrap;
+  border-radius: 10px;
   margin-bottom: 20px;
 }
 
+.note button{
+  color: var(--mat-sys-primary);
+  transition: .3s ease;
+}
+.note button:hover{
+ text-decoration: underline;
+}
 
 
 
@@ -109,4 +117,34 @@ table tr:hover .avatar {
   font-size: 12px;
   margin-bottom: 10px;
   color:  var(--mat-sys-secondary);
+}
+
+@media (max-width:768px) {
+  .col-desktop {
+    display: none;
+  }
+  
+}
+@media (max-width:425px) {
+  .col-tablet {
+    display: none;
+  }
+  .col-date{
+    text-align: right;
+  }
+  
+}
+@media (max-width: 425px) {
+  .actions-head{
+position: fixed;
+    top: 0px;
+    left: 0;
+    right: 0;
+    z-index: 10;
+    background-color: var(--mat-sys-surface);
+    height: 70px;
+    transition: .3s ease ;
+    padding: 0 10px;
+    border-bottom: none;
+  }
 }

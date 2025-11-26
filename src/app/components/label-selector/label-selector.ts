@@ -3,7 +3,6 @@ import { Label } from '../../../utils/label.modal';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { LabelService } from '../../services/label.service';
-import { DialogService } from '../../services/dialog.service';
 import { LabelForm } from '../label-form/label-form';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialog } from '@angular/material/dialog';

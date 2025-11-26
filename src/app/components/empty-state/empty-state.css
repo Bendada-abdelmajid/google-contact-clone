@@ -3,15 +3,16 @@
     align-items: center;
     gap: 10px;
 }
-.content{
-      flex: 1;
+.empty-centent{
+    
     display: flex;
     flex-direction: column;
     gap: 10px;
     justify-content: center;
     align-items: center;
     text-align: center;
+    height:  calc(100vh - 180px);;
 }
-.content img{
+.empty-centent img{
     width: 250px;
 }

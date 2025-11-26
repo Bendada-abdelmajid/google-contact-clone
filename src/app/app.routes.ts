@@ -1,25 +1,41 @@
+// app.routes.ts
 import { Routes } from '@angular/router';
-import { Home } from './pages/home/home';
-import { Favorits } from './pages/favorits/favorits';
-import { ContactDetails } from './pages/contact-details/contact-details';
-import { EditContact } from './pages/edit-contact/edit-contact';
-import { NewContact } from './pages/new-contact/new-contact';
-import { LabelPage } from './pages/label/label';
-import { OtherContact } from './pages/other-contact/other-contact';
-import { Trush } from './pages/trush/trush';
-import { Suggestions } from './pages/suggestions/suggestions';
 
 export const routes: Routes = [
-  { path: '', component: Home },
-  { path: 'favorites', component: Favorits },
-  { path: 'new', component: NewContact },
-  { path: 'other', component: OtherContact },
-  { path: 'trush', component: Trush },
-  { path: 'suggestions', component: Suggestions },
+  { 
+    path: '', 
+    loadComponent: () => import('./pages/home/home').then(m => m.Home)
+  },
+  { 
+    path: 'favorites', 
+    loadComponent: () => import('./pages/favorits/favorits').then(m => m.Favorits)
+  },
+  { 
+    path: 'new', 
+    loadComponent: () => import('./pages/new-contact/new-contact').then(m => m.NewContact)
+  },
+  { 
+    path: 'other', 
+    loadComponent: () => import('./pages/other-contact/other-contact').then(m => m.OtherContact)
+  },
+  { 
+    path: 'trush', 
+    loadComponent: () => import('./pages/trush/trush').then(m => m.Trush)
+  },
+  { 
+    path: 'suggestions', 
+    loadComponent: () => import('./pages/suggestions/suggestions').then(m => m.Suggestions)
+  },
   {
     path: 'person/:id',
-    component: ContactDetails,
+    loadComponent: () => import('./pages/contact-details/contact-details').then(m => m.ContactDetails)
   },
-   { path: 'person/:id/edit', component: EditContact },
-   { path: 'label/:id', component: LabelPage },
+  { 
+    path: 'person/:id/edit', 
+    loadComponent: () => import('./pages/edit-contact/edit-contact').then(m => m.EditContact)
+  },
+  { 
+    path: 'label/:id', 
+    loadComponent: () => import('./pages/label/label').then(m => m.LabelPage)
+  },
 ];

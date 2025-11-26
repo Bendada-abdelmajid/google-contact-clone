@@ -15,7 +15,7 @@ html {
         ),
       ),
 
-      typography: 'Google Sans Text Regular',
+      typography: 'Open Sans',
       density: 0,
     )
   );
@@ -37,6 +37,10 @@ html {
       background-color: var(--mat-sys-surface-container-lowest),
     )
   );
+   @include mat.progress-spinner-overrides((
+   size:50px,
+   active-indicator-width:4px
+  ));
 }
 button {
   border: none;
@@ -187,6 +191,7 @@ table td {
   .content {
     padding: 0 10px;
     max-height: 100%;
+    
   }
   .content .title {
     padding-left: 10px;

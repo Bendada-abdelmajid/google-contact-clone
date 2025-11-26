@@ -3,15 +3,49 @@
 *{
     margin: 0;
     padding: 0;
+  
     box-sizing: border-box;
 }
+
 html, body { height: 100%; }
-body { margin: 0; 
-    font-family: Roboto,Arial,sans-serif;
-  line-height: 1.25rem;
-  font-size: .875rem;
-  letter-spacing: .0142857143em;
-  font-weight: 400;
-  color: var(--gm3-sys-color-on-surface,#1f1f1f);
-    font-family: Roboto, "Helvetica Neue", sans-serif;
+
+ #splash-screen {
+  position: fixed;
+  inset: 0;
+  background: #ffffff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  z-index: 99999;
+gap: 100px;
+  transition: opacity 0.5s ease;
+}
+ #splash-screen img{
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
  }
+
+
+/* Your logo or spinner */
+#splash-screen h4{
+  font-size: 18px;
+  display: block;
+  color: #ddd;
+  font-weight: 500;
+  box-sizing: border-box;
+  animation: animloader 1s ease-in infinite alternate;
+}
+
+@keyframes animloader {
+  0% {
+    filter: blur(0px);
+  
+  }
+  100% {
+    filter: blur(1px);
+  }
+}
+
+

@@ -1,5 +1,4 @@
-<!-- <p>suggestions works!</p>
-<button (click)="showContacts()">show</button> -->
+@if (dublicateGroups().length > 0 ) {
 <div class="content">
   <div class="suggestions">
     <div class="item">
@@ -14,7 +13,11 @@
       </div>
     </div>
 
-    <div class="item" [class.active]="contactService.duplicateContacts().length > 0" >
+    <div
+      class="item"
+      (click)="tooggleShowWindow(true)"
+      [class.active]="contactService.duplicateContacts().length > 0"
+    >
       <div class="img">
         <mat-icon>content_copy</mat-icon>
       </div>
@@ -27,19 +30,28 @@
         <p>{{ contactService.duplicateContacts().length }} person with duplicate listings</p>
         }
       </div>
-       @if(contactService.duplicateContacts().length == 0){
-       <mat-icon style="margin-left: auto; color: var(--mat-sys-primary);">check</mat-icon>
+      @if(contactService.duplicateContacts().length == 0){
+      <mat-icon style="margin-left: auto; color: var(--mat-sys-primary)">check</mat-icon>
 
-        } @else {
-        <mat-icon style="margin-left: auto">arrow_right</mat-icon>
-        }
-      
+      } @else {
+      <mat-icon style="margin-left: auto">arrow_right</mat-icon>
+      }
     </div>
   </div>
-  <div class="result">
+  <div class="result" [class.show]="showwindow()">
     <div class="head">
+      <button class="back-button" matIconButton (click)="tooggleShowWindow(false)">
+        <mat-icon class="small-icon">arrow_back</mat-icon>
+      </button>
       <h4>Merge duplicates ({{ contactService.duplicateContacts().length }})</h4>
-      <button [disabled]="contactService.duplicateContacts().length == 0" matButton="filled" (click)="mergeAllContacts()">Merge All</button>
+      <button
+        class="merge-all"
+        [disabled]="contactService.duplicateContacts().length == 0"
+        matButton="filled"
+        (click)="mergeAllContacts()"
+      >
+        Merge All
+      </button>
     </div>
     <div class="contact-list">
       @for (contacts of dublicateGroups(); track $index) {
@@ -91,7 +103,9 @@
         </div>
         } @else {
         <div class="actions">
-          @if(!loadingGroups()[$index]){<button matButton="" (click)="dismissMerge(contacts)">Dismiss</button>}
+          @if(!loadingGroups()[$index]){<button matButton="" (click)="dismissMerge(contacts)">
+            Dismiss</button
+          >}
           <button matButton="tonal" (click)="mergeContacts($index, contacts)">Merge</button>
         </div>
         }
@@ -100,3 +114,12 @@
     </div>
   </div>
 </div>
+}@else {
+<div class=" empty-centent">
+  <img
+    src="https://ssl.gstatic.com/social/contactsui/images/mergeandfix/contacts_fixup_line_light.svg"
+    alt=""
+  />
+  <p>Good work. No new suggestions.</p>
+</div>
+}

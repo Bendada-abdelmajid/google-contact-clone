@@ -26,10 +26,10 @@ import { MatMenuModule } from '@angular/material/menu';
 import { LabelService } from '../../services/label.service';
 import { Label } from '../../../utils/label.modal';
 
-import { LabelForm } from '../label-form/label-form';
-import { DialogService } from '../../services/dialog.service';
-import { LabelSelector } from '../label-selector/label-selector';
 
+import { LabelSelector } from '../label-selector/label-selector';
+// import { IntlTelInputComponent } from "intl-tel-input/angularWithUtils";
+// import "intl-tel-input/styles";
 @Component({
   selector: 'app-contact-form',
   standalone: true,

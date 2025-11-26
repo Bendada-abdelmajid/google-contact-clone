@@ -2,6 +2,9 @@
   <h1 class="title">
     Contacts <sup>({{contactService.contacts().length }})</sup>
   </h1>
-
+@if(contactService.contacts().length > 0){
 <app-data-table [data]="contactService.contacts()"></app-data-table>
+  }@else {
+  <app-empty-state ></app-empty-state>
+  }
 </div>

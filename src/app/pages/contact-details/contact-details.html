@@ -87,13 +87,14 @@
         @if (contact.emails?.length) {
         <div class="item">
           <mat-icon>mail</mat-icon>
-          @for (item of contact.emails; track $index) {
           <div>
+          @for (item of contact.emails; track $index) {
+          <div  class="item-value">
             <p>{{ item.value }}</p>
             @if(item.label){<span> • {{ item.label }}</span
             >}
           </div>
-          }
+          }</div>
         </div>
         } @else if (!contact.deleted && !contact.hidden) {
         <div class="item">
@@ -106,13 +107,14 @@
         @if (contact.phones?.length) {
         <div class="item">
           <mat-icon>call</mat-icon>
-          @for (item of contact.phones; track $index) {
           <div>
+          @for (item of contact.phones; track $index) {
+          <div class="item-value">
             <p>{{ item.value }}</p>
             @if(item.label){<span> • {{ item.label }}</span
             >}
           </div>
-          }
+          }</div>
         </div>
         } @else if (!contact.deleted && !contact.hidden) {
         <div class="item">
@@ -125,13 +127,14 @@
         @if (contact.addresses?.length) {
         <div class="item">
           <mat-icon>location_on</mat-icon>
-          @for (item of contact.addresses; track $index) {
           <div>
+          @for (item of contact.addresses; track $index) {
+          <div  class="item-value">
             <p>{{ item.city }}</p>
             @if(item.label){<span> • {{ item.label }}</span
             >}
           </div>
-          }
+          }</div>
         </div>
         } @else if (!contact.deleted && !contact.hidden) {
         <div class="item">

@@ -95,7 +95,7 @@
   align-items: center;
   gap: 15px;
 }
-.item div {
+.item  .item-value{
   display: flex;
   align-items: center;
   gap: 5px;

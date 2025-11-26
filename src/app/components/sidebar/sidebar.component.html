@@ -16,7 +16,7 @@
   <mat-nav-list class="list">
     <!-- Contacts -->
     <mat-list-item routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
-      <a routerLink="/" matLine>
+      <a routerLink="/" matLine (click)="hundellNavigation()">
         <mat-icon>person_outline</mat-icon>
         <span>Contacts</span>
 
@@ -28,7 +28,7 @@
 
     <!-- Favorites -->
     <mat-list-item routerLinkActive="active">
-      <a routerLink="/favorites" matLine>
+      <a routerLink="/favorites" (click)="hundellNavigation()" matLine>
         <mat-icon>star_outline</mat-icon>
         <span>Favorites</span>
 
@@ -38,7 +38,7 @@
       </a>
     </mat-list-item>
     <mat-list-item routerLinkActive="active" class="other-btn">
-      <a routerLink="/other" matLine>
+      <a routerLink="/other" (click)="hundellNavigation()" matLine>
         <mat-icon>archive</mat-icon>
         <span>Other Contacts</span>
 
@@ -63,7 +63,7 @@
 
     <!-- Merge & fix -->
     <mat-list-item routerLinkActive="active">
-      <a routerLink="/suggestions" matLine>
+      <a routerLink="/suggestions" (click)="hundellNavigation()" matLine>
         <mat-icon>handyman</mat-icon>
         <span>Merge & Fix</span>
         @if (contactService.duplicateContacts().length > 0) {
@@ -74,7 +74,7 @@
 
     <!-- Import -->
     <mat-list-item>
-      <a (click)="import()" matLine>
+      <a (click)="import(); hundellNavigation()" matLine>
         <mat-icon>file_download</mat-icon>
         <span>Import</span>
       </a>
@@ -82,7 +82,7 @@
 
     <!-- Trash -->
     <mat-list-item routerLinkActive="active">
-      <a routerLink="/trush" matLine>
+      <a routerLink="/trush" (click)="hundellNavigation()" matLine>
         <mat-icon>delete_outline</mat-icon>
         <span>Trash</span>
       </a>
@@ -91,14 +91,14 @@
     <!-- Labels section -->
     <div class="label-cont">
       <span class="label">Labels</span>
-      <button (click)="openDialog()" mat-icon-button>
+      <button (click)="openDialog(); hundellNavigation()" mat-icon-button>
         <mat-icon>add</mat-icon>
       </button>
     </div>
     @for (item of labelService.labels(); track item.id) {
     <mat-list-item routerLinkActive="active" class="label-item-cont">
       <div matLine class="label-item">
-        <a [routerLink]="['/label', item.id]">
+        <a [routerLink]="['/label', item.id]" (click)="hundellNavigation()">
           <mat-icon>label</mat-icon>
           <span>{{ item.name }}</span>
           <span class="count">{{ item.contacts.length }}</span>

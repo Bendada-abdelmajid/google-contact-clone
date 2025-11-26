@@ -5,6 +5,6 @@
   @if( contactService.favorites().length > 0){
   <app-data-table [data]="contactService.favorites()"></app-data-table>
   }@else {
-  <app-empty-state class="empty"></app-empty-state>
+  <app-empty-state ></app-empty-state>
   }
 </div>

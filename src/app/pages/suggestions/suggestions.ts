@@ -16,11 +16,15 @@ export class Suggestions {
   contactService = inject(ContactService);
   dublicateGroups = signal<Contact[][]>([]);
   loadingGroups = signal<boolean[]>([]);
+  showwindow =  signal<boolean>(false);;
   ngOnInit() {
     this.dublicateGroups.set(this.contactService.duplicateContacts());
   }
   showContacts() {
     console.log(this.contactService.duplicateContacts());
+  }
+  tooggleShowWindow(v:boolean) {
+    this.showwindow.set((v));
   }
   mergeContacts(index: number, contacts: Contact[]) {
     // Start loading

@@ -1,6 +1,6 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-
+import 'dotenv/config';
 @Injectable({ providedIn: 'root' })
 export class PexelsService {
   private http = inject(HttpClient);

@@ -1,11 +1,15 @@
 <h2 mat-dialog-title>{{title()}}</h2>
+<form (submit)="onConfirm($event)">
 <mat-dialog-content class="content">
   <mat-form-field class="field" appearance="outline">
+    
     <mat-label>New Label</mat-label>
    <input [value]="name()" matInput (input)="name.set($any($event.target).value)" />
+
   </mat-form-field>
 </mat-dialog-content>
 <mat-dialog-actions>
   <button matButton (click)="onCancel()">Cancel</button>
-  <button mat-flat-button (click)="onConfirm()" cdkFocusInitial>Save</button>
+  <button mat-flat-button type="submit"  cdkFocusInitial>Save</button>
 </mat-dialog-actions>
+</form>

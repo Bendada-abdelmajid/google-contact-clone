@@ -1,4 +1,10 @@
-import { ChangeDetectorRef, Component, inject, Inject, Input, PLATFORM_ID, signal } from '@angular/core';
+import {
+  ChangeDetectorRef,
+  Component,
+  Inject,
+  PLATFORM_ID,
+  signal,
+} from '@angular/core';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
@@ -25,11 +31,10 @@ import { ProfilePicker } from '../profile-picker/profile-picker';
 import { MatMenuModule } from '@angular/material/menu';
 import { LabelService } from '../../services/label.service';
 import { Label } from '../../../utils/label.modal';
-
-
 import { LabelSelector } from '../label-selector/label-selector';
-// import { IntlTelInputComponent } from "intl-tel-input/angularWithUtils";
-// import "intl-tel-input/styles";
+import { MatTooltipModule } from '@angular/material/tooltip';
+
+
 @Component({
   selector: 'app-contact-form',
   standalone: true,
@@ -46,13 +51,14 @@ import { LabelSelector } from '../label-selector/label-selector';
     ProfilePicker,
     MatMenuModule,
     LabelSelector,
+    MatTooltipModule
   ],
   templateUrl: './contact-form.html',
   styleUrl: './contact-form.css',
 })
 export class ContactForm {
   defaultAvatar =
-    'https://www.gstatic.com/identity/boq/profilepicturepicker/photo_silhouette_e02a5f5deb3ffc173119a01bc9575490.png';
+    '/profile-placeholder.png';
   showMore = signal<boolean>(false);
   showProfileInfo = signal<boolean>(false);
   selectedAvatar = signal<string | undefined>(undefined);
@@ -60,8 +66,6 @@ export class ContactForm {
   contactId!: string;
   contactForm: FormGroup;
   submitted = false;
-  isSubmitting = false;
-  isLoading = false;
   isFavorite = false;
   isBrowser: boolean;
   labelStorage = signal<Label[]>([]);
@@ -85,7 +89,7 @@ export class ContactForm {
     private snackBar: MatSnackBar,
     private contactService: ContactService,
     public labelService: LabelService,
-     private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef
   ) {
     this.route.paramMap.subscribe((params) => {
       this.contactId = params.get('id')!;
@@ -141,7 +145,7 @@ export class ContactForm {
                 poBox: [address.poBox],
               })
             )
-          : [this.createAddressGroup()]
+          : []
       ),
       day: [day],
       month: [month],
@@ -255,12 +259,36 @@ export class ContactForm {
       this.labelService.addContactToLabel(el.id, id);
     });
   }
+
+  trimFormValues(form: FormGroup | FormArray) {
+    const controls = (form as FormGroup).controls ?? (form as FormArray).controls;
+    Object.keys(controls).forEach((key) => {
+      const control = controls[key] as AbstractControl;
+
+      // If nested FormGroup or FormArray, recurse
+      if (control instanceof FormGroup || control instanceof FormArray) {
+        this.trimFormValues(control);
+        return;
+      }
+
+      // Trim string values
+      const val = control.value;
+      if (typeof val === 'string') {
+        const trimmed = val.trim();
+        if (trimmed !== val) {
+          control.setValue(trimmed, { emitEvent: false });
+        }
+      }
+    });
+  }
   onSubmit(): void {
     try {
+      this.trimFormValues(this.contactForm);
+      document.getElementById("loader")?.classList.add("show");
       if (this.contactForm.valid || this.hasAtLeastOneField) {
-        this.isLoading = true;
+ 
         this.submitted = true;
-         this.cdr.detectChanges();
+        this.cdr.detectChanges();
 
         setTimeout(() => {
           const contactData = this.contactForm.value;
@@ -304,9 +332,9 @@ export class ContactForm {
             }
           );
           this.location.back();
-          this.isLoading = false;
-          
-           this.cdr.detectChanges();
+        document.getElementById("loader")?.classList.remove("show");
+
+          this.cdr.detectChanges();
         }, 3000);
       } else {
         console.log(this.contactForm.errors);

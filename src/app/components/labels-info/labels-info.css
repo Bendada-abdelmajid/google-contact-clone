@@ -1,0 +1,25 @@
+.content {
+  width: 840px;
+}
+.steps{
+    display: flex;
+    
+    gap: 30px;
+    text-align: center;
+    padding: 30px  30px 40px;
+}
+.steps div{
+    flex: 1;
+    text-align: center;
+}
+.steps img{
+    width: 200px;
+    height: 200px;
+    margin: 0 auto 10px;
+    display: block;
+}
+.close-btn{
+position: absolute;
+  top: 16px;
+  right: 20px;
+}

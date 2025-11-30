@@ -53,7 +53,7 @@ export class DeleteLabel {
       this.isLoading = true;
 
       if (this.deleteContacts && this.label) {
-        alert("yes")
+      
         console.log(this.label)
         this.label.contacts.forEach((id) => this.contactService.deleteContact(id,  this.label!.id));
       }

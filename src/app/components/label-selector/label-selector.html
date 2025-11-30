@@ -1,21 +1,38 @@
-<div class="label-cont"> @if(selectedLabels.length> 0){
-<div class="btns">
-  @for (item of selectedLabels; track item.id) {
-  <button matButton="outlined" class="add-label-btn">
-    <mat-icon>label</mat-icon> {{ item?.name }}</button
-  >}
-  <button [matMenuTriggerFor]="menu" matIconButton>
-    <mat-icon class="small-icon">edit</mat-icon>
-  </button>
-</div>
-} @else {
-<button [matMenuTriggerFor]="menu" matButton="outlined" class="add-label-btn">
-  <mat-icon>add</mat-icon> Label
+@if(icon){
+<button
+  matTooltipPosition="above"
+  matTooltip="Manage labels"
+  [matMenuTriggerFor]="menu"
+  matIconButton
+>
+  <mat-icon>label</mat-icon>
 </button>
+} @else {
+<div class="label-cont">
+  @if(selectedLabels.length> 0){
+  <div class="btns">
+    @for (item of selectedLabels; track item.id) {
+    <button matButton="outlined" class="add-label-btn">
+      <mat-icon>label</mat-icon> {{ item?.name }}</button
+    >}
+    <button
+      matTooltipPosition="above"
+      matTooltip="Manage labels"
+      [matMenuTriggerFor]="menu"
+      matIconButton
+    >
+      <mat-icon class="small-icon edit">edit</mat-icon>
+    </button>
+  </div>
+  } @else {
+  <button [matMenuTriggerFor]="menu" matButton="outlined" class="add-label-btn">
+    <mat-icon>add</mat-icon> Label
+  </button>
+  }
+</div>
 }
 
 <mat-menu #menu="matMenu" class="menu">
-
   @if ( labelService.labels().length> 0) {
   <h4 class="label">Manage Labels</h4>
   @for (item of labelService.labels(); track item.id) {
@@ -28,10 +45,7 @@
   </button>
   }
   <hr class="divider" />
-}
-
-
-  @if (showApplyButton()) {
+  } @if (showApplyButton()) {
   <button mat-menu-item class="menu-item" (click)="apply()">
     <mat-icon class="empty">add</mat-icon>
     <p>apply</p>
@@ -43,4 +57,3 @@
   </button>
   }
 </mat-menu>
-</div>

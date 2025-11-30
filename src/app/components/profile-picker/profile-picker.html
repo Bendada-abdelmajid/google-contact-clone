@@ -1,7 +1,7 @@
 <div class="avatars-cont" [class.menu-open]="showMenu()">
   <div class="avatar">
     @if(selectedAvatar){
-    <img [src]="selectedAvatar" alt="User avatar" />
+    <img [src]="selectedAvatar" loading="lazy" alt="User avatar" />
     } @else if(name) {
     <span
     
@@ -13,7 +13,7 @@
     >
 
     } @else {
-    <img [src]="selectedAvatar || defaultAvatar" alt="User avatar" />
+    <img [src]="selectedAvatar || defaultAvatar" loading="lazy" alt="User avatar" />
     }
 
     <button matIconButton class="add-btn" (click)="toogleMenu(true)"><mat-icon>add</mat-icon></button>
@@ -36,7 +36,7 @@
             [class.selected]="selectedAvatar === avatar.src.medium"
             (click)=" chooseAvatar(avatar.src.medium)"
           >
-            <img [src]="avatar.src.medium" alt="Avatar" />
+            <img loading="lazy" wi [src]="avatar.src.medium" alt="Avatar" />
           </div>
           }
           <button mat-button class="more-btn">More</button>

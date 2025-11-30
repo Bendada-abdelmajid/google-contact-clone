@@ -1,13 +1,14 @@
-@if(isLoading){
-<div class="loader"></div>
-}
+
+
 
 <form [formGroup]="contactForm" class="contact-form">
   <div class="nav">
-    <a routerLink="/" matIconButton class="back-btn" type="button">
+    <a  matTooltipPosition="above"
+            matTooltip="Back"  routerLink="/" matIconButton class="back-btn" type="button">
       <mat-icon class="small-icon">arrow_back</mat-icon>
     </a>
-    <button matIconButton class="star-btn" type="button" (click)="toggleFavorite()">
+    <button matTooltipPosition="above"
+            [matTooltip]="isFavorite ? 'Remove from favorites' : 'Add to favorites'" matIconButton class="star-btn" type="button" (click)="toggleFavorite()">
       <mat-icon class="small-icon" [class.filled]="isFavorite">star</mat-icon>
     </button>
     <button
@@ -36,8 +37,8 @@
     <div class="section">
       <mat-icon class="section-icon">person_outline</mat-icon>
       <div>
-        <mat-form-field appearance="outline">
-          <mat-label>First Name</mat-label>
+        <mat-form-field appearance="outline" >
+          <mat-label>First Name</mat-label>  
           <input matInput formControlName="firstName" />
         </mat-form-field>
 
@@ -53,7 +54,8 @@
 
         }
       </div>
-      <button type="button" class="arrow-btn" matIconButton (click)="toogleShowProfileInfo()">
+      <button matTooltipPosition="above"
+            matTooltip="Show more"  type="button" class="arrow-btn" matIconButton (click)="toogleShowProfileInfo()">
         <mat-icon class="small-icon">keyboard_arrow_down</mat-icon>
       </button>
     </div>
@@ -89,21 +91,14 @@
               [hidePhoneIcon]="true"
             />
 
-            <!-- <ngx-material-intl-tel-input
-              appearance="outline"
-              [fieldControlName]="'value'"
-              [required]="true"
-              [autoIpLookup]="false"
-              [hidePhoneIcon]="true"
-            >
-            </ngx-material-intl-tel-input> -->
             } @if(item.get('value')?.value != ""){
             <mat-form-field appearance="outline">
               <mat-label>Label</mat-label>
               <input matInput formControlName="label" />
             </mat-form-field>
             }
-            <button mat-icon-button class="remove-btn" type="button" (click)="removePhone($index)">
+            <button matTooltipPosition="above"
+            matTooltip="Remove" mat-icon-button class="remove-btn" type="button" (click)="removePhone($index)">
               <mat-icon class="small-icon">close</mat-icon>
             </button>
           </div>
@@ -141,7 +136,8 @@
             </mat-form-field>
 
             }
-            <button mat-icon-button class="remove-btn" type="button" (click)="removeEmail($index)">
+            <button matTooltipPosition="above"
+            matTooltip="Remove"  mat-icon-button class="remove-btn" type="button" (click)="removeEmail($index)">
               <mat-icon class="small-icon">close</mat-icon>
             </button>
           </div>
@@ -191,7 +187,8 @@
             <mat-form-field appearance="outline"
               ><mat-label>Label</mat-label><input matInput formControlName="label"
             /></mat-form-field>
-            <button
+            <button matTooltipPosition="above"
+            matTooltip="Remove" 
               mat-icon-button
               class="remove-btn"
               type="button"

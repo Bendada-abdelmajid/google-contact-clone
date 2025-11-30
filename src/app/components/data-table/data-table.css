@@ -138,3 +138,11 @@ position: fixed;
     border-bottom: none;
   }
 }
+.link {
+  text-decoration: none;
+  color: inherit;
+  transition: .3s ease color;
+}
+.link:hover {
+  color: var(--mat-sys-primary);
+}

@@ -1,51 +1,50 @@
-.content{
-    overflow: visible;
-    height: auto;
-    width: 450px;
-    /* width: 100%; */
-  
-
+.content {
+  overflow: visible;
+  height: auto;
+  width: 450px;
+  /* width: 100%; */
 }
-.desc{
-    margin: 10px 0 20px  ;
+.desc {
+  margin: 10px 0 20px;
 }
 .input {
-    display: none;
-    visibility: hidden;
+  display: none;
+  visibility: hidden;
 }
-.file-btn{
-    margin: 15px 0 20px;
+.file-btn {
+  margin: 15px 0 20px;
 }
 
 .file-name {
-display: flex;
-align-items: center;
-gap: 5px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
 }
 .file-name button {
-margin-right: 10px;
+  margin-right: 10px;
 }
-.success{
-font-size: .875rem;
+.success {
+  font-size: 0.875rem;
   font-weight: 400;
   letter-spacing: 0;
   line-height: 1.25rem;
-  background: var(--gm3-sys-color-tertiary-container,#c4eed0);
+  background: var(--gm3-sys-color-tertiary-container, #c4eed0);
   border-radius: 4px;
   margin: 16px 0;
   padding: 4px 8px;
   color: #444746;
 }
-.filed{
-    color:#146c2e;
+.filed {
+  color: #146c2e;
 }
 .label-cont {
   display: flex;
   align-items: center;
+  margin-top: 10px;
   gap: 10px;
 }
-.label-cont button{
-    padding: 0 20px 0 15px;
-  border-radius: 6px;
-  height: 28px;
+
+.selector {
+  margin: 0 0px -20px -10px;
+  display: block;
 }

@@ -7,13 +7,15 @@ import { MatListModule } from '@angular/material/list';
 import { MatButtonModule } from '@angular/material/button';
 import { Router, RouterModule } from '@angular/router';
 import { ContactService } from '../../services/contact.service';
-import { MatDialog } from '@angular/material/dialog';
+
 import { LabelForm } from '../label-form/label-form';
 
 import { LabelService } from '../../services/label.service';
 import { DeleteLabel } from '../delete-label/delete-label';
 import { MatMenuModule } from '@angular/material/menu';
 import { ContactImport } from '../contact-import/contact-import';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { DialogService } from '../../services/dialog.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -26,6 +28,7 @@ import { ContactImport } from '../contact-import/contact-import';
     MatButtonModule,
     MatListModule,
     MatMenuModule,
+    MatTooltipModule
   ],
   templateUrl: './sidebar.component.html',
   styleUrl: './sidebar.component.css',
@@ -36,7 +39,7 @@ export class SidebarComponent {
   @Input() isOpen: boolean = true;
   contactService = inject(ContactService);
   labelService = inject(LabelService);
-  dialog = inject(MatDialog);
+  dialog = inject(DialogService);
 
   uploadContacts() {
     // console.log(this.labelService.labels());
@@ -53,7 +56,7 @@ export class SidebarComponent {
 
   }
   updateLabel(name: string, id: string) {
-    // alert(name);
+
     this.dialog.open(LabelForm, {
       data: {
         name: name,

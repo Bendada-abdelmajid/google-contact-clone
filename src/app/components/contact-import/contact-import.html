@@ -10,8 +10,8 @@
   </div>
   <p class="success">File successfully uploaded. Click Import below to start importing.</p>
   <div class="label-cont">
-    <span>Optional: {{contactLabels().length}}</span>
-    <app-label-selector [selectedLabels]="contactLabels()" (onApply)="handleLabelApply($event)"></app-label-selector>
+    <span>Optional:</span>
+    <app-label-selector class="selector" [selectedLabels]="contactLabels()" (onApply)="handleLabelApply($event)"></app-label-selector>
   </div>
   } @else {
   <p class="desc">

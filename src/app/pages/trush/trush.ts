@@ -7,8 +7,8 @@ import { MatTableModule } from '@angular/material/table';
 import { Contact } from '../../../utils/contact.model';
 import { ContactService } from '../../services/contact.service';
 import { RouterLink } from '@angular/router';
-import { MatDialog } from '@angular/material/dialog';
 import { DeleteDialogComponent } from '../../components/delete-dialog/delete-dialog';
+import { DialogService } from '../../services/dialog.service';
 
 @Component({
   selector: 'app-trush',
@@ -27,7 +27,7 @@ export class Trush {
   contactService = inject(ContactService);
   selectedContacts = signal<Contact[]>([]);
   displayedColumns: string[] = ['name', 'phone', 'deleted-date', 'actions'];
-  dialog = inject(MatDialog);
+  dialog = inject(DialogService);
   constructor() {
     console.log(this.contactService.deletedContacts());
   }

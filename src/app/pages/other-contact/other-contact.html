@@ -5,6 +5,6 @@
 @if (contactService.otherContacts().length> 0) {
 <app-data-table [data]="contactService.otherContacts()"></app-data-table>
   }@else {
-  <app-empty-state ></app-empty-state>
+  <app-empty-state [showBtns]="false" ></app-empty-state>
   }
 </div>

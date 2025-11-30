@@ -14,10 +14,12 @@ import { MatIconRegistry } from '@angular/material/icon';
 import { MatDialogModule } from '@angular/material/dialog';
 import {  MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+
 @Component({
   selector: 'app-root',
 
-  imports: [RouterOutlet, HeaderComponent, SidebarComponent, MatSidenavModule, MatDialogModule, MatProgressSpinnerModule],
+  imports: [RouterOutlet, HeaderComponent, SidebarComponent, MatSidenavModule, MatDialogModule, MatProgressSpinnerModule, MatProgressBarModule],
   templateUrl: './app.html',
   styleUrl: './app.css',
 })

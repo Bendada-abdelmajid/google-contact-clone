@@ -1,0 +1,32 @@
+.copy-wrapper {
+  position: relative;
+
+  width: fit-content;
+}
+.copy-wrapper:hover button {
+  opacity: 1;
+}
+.copy-wrapper button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: -30px;
+  cursor: pointer;
+  border-radius: 50%;
+  width: 25px;
+  height: 25px;
+  z-index: 10;
+  transition: 0.3s ease;
+  opacity: 0;
+}
+.copy-wrapper .copy-icon {
+  font-size: 16px;
+  height: 16px;
+  width: 16px;
+}
+.copy-wrapper button:hover {
+  background-color: var(--mat-sys-surface-bright);
+}
+.copy-wrapper button:hover .copy-icon {
+  color: var(--mat-sys-primary);
+}

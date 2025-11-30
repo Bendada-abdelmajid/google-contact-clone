@@ -2,7 +2,9 @@
 <main class="main">
 </main>
 <router-outlet /> -->
+<mat-progress-bar id="loader" mode="indeterminate"></mat-progress-bar>
 <main>
+  
   <app-header [toggleSidebar]="toggleSidebar.bind(this)"></app-header>
   <mat-sidenav-container>
     <mat-sidenav [mode]="sidenavMode" [opened]="isOpen()" style="width: 284px">

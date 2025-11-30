@@ -65,7 +65,5 @@ export class Suggestions {
     this.dublicateGroups.set(this.contactService.duplicateContacts());
   }
 
-  // alert('Merging ' + contacts.length + ' contacts');
-  // const result = this.contactService.mergeDuplicates(contacts);
-  // console.log('result', result);
+ 
 }

@@ -3,13 +3,22 @@
       margin-left: 20px;
 }
 .add-label-btn {
-  width: fit-content;
-
-  padding: 0 15px;
+width: fit-content;
+  padding: 0px 11px 0 5px;
   border-radius: 8px;
-  font-size: 13px;
-
+  font-size: 12px;
   height: 28px;
+  color: var(--mat-sys-on-secondary-fixed-variant);
+}
+.add-label-btn .mat-icon{
+  margin-right: 5px;
+  margin-left: 0;
+  font-size: 16px;
+ width: 16px;
+  height: 16px;
+}
+.edit{
+    color: var(--mat-sys-primary);
 }
 .btns {
   display: flex;

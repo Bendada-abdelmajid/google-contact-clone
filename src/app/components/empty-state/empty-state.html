@@ -1,9 +1,11 @@
 <div class="empty-centent">
   <img
-    src="https://ssl.gstatic.com/social/contactsui/images/emptycontacts/emptycontacts_animation_cell4.png"
+   loading="lazy"
+    src="/empty.png"
     alt=""
   />
   <p>No contacts yet</p>
+  @if(showBtns) {
   <div class="btns">
     <a routerLink="/new" matButton="">
       <mat-icon>person_outline</mat-icon>
@@ -14,4 +16,5 @@
       <span>import Contacts</span>
     </button>
   </div>
+  }
 </div>

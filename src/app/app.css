@@ -44,3 +44,10 @@ main {
   }
 
 }
+#loader{
+  z-index: 1000;
+  display: none;
+}
+#loader.show{
+  display: block;
+}

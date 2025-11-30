@@ -5,11 +5,12 @@ import { MatMenuModule } from '@angular/material/menu';
 import { LabelService } from '../../services/label.service';
 import { LabelForm } from '../label-form/label-form';
 import { MatButtonModule } from '@angular/material/button';
-import { MatDialog } from '@angular/material/dialog';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { DialogService } from '../../services/dialog.service';
 
 @Component({
   selector: 'app-label-selector',
-  imports: [MatIconModule, MatMenuModule, MatButtonModule],
+  imports: [MatIconModule, MatMenuModule, MatButtonModule, MatTooltipModule],
   templateUrl: './label-selector.html',
   styleUrl: './label-selector.css',
 })
@@ -17,7 +18,8 @@ export class LabelSelector implements OnInit {
   labelService = inject(LabelService);
 
   @Input() selectedLabels: Label[] = [];
-  private dialog = inject(MatDialog);
+  @Input() icon?: boolean = false;
+  private dialog = inject(DialogService);
   // ✅ Output to emit success to parent
   onApply = output<Label[]>();
 

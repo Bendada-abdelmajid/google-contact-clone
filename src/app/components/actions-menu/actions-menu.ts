@@ -1,38 +1,26 @@
-import { Component, computed, inject, Input, signal } from '@angular/core';
+import { Component, inject, Input, signal } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { exportContactsToCSV, printContact } from '../../../utils/utils';
 import { Contact } from '../../../utils/contact.model';
 import { ContactService } from '../../services/contact.service';
-import { MatDialog } from '@angular/material/dialog';
 import { DeleteDialogComponent } from '../delete-dialog/delete-dialog';
+import { DialogService } from '../../services/dialog.service';
 
 @Component({
-  selector: 'app-contact-print',
+  selector: 'app-actions-menu',
   imports: [MatIconModule, MatMenuModule],
-  templateUrl: './contact-print.html',
-  styleUrl: './contact-print.css',
+  templateUrl: './actions-menu.html',
+  styleUrl: './actions-menu.css',
 })
-export class ContactPrint {
+export class ActionsMenu{
   @Input() deselect?: () => void;
   @Input() detailsPage?: boolean;
   contactService = inject(ContactService);
   private _contacts = signal<Contact[]>([]);
    @Input() contacts:Contact[] = [];
-  dialog = inject(MatDialog);
-  // @Input()
-  // set contacts(value: Contact[]) {
-  //   this._contacts.set(value || []);
-  // }
-  // get contacts(): Contact[] {
-  //   return this._contacts();
-  // }
+  dialog = inject(DialogService);
 
-  // inContacts = computed(() => {
-  //   const contacts = this._contacts();
-  //   if (contacts.length === 0) return false;
-  //   return contacts[0].hidden;
-  // });
   print() {
     printContact(this.contacts);
     if (this.deselect) {

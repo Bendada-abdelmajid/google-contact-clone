@@ -1,6 +1,17 @@
 <div class="content">
   <h1 class="title">
-    {{label()?.name}} <sup>({{contacts().length }})</sup>
+    {{ label()?.name }} <sup>({{ contacts().length }})</sup>
   </h1>
-<app-data-table [data]="contacts()"></app-data-table>
+  @if(contacts().length){
+  <app-data-table [data]="contacts()"></app-data-table>
+  }@else{
+  <div class="empty-centent">
+    <img
+      src="https://ssl.gstatic.com/social/contactsui/images/labels/emptylabelicon_2x.png"
+      alt=""
+    />
+    <p>No contacts with this label</p>
+    <button matButton="" (click)="showSteps()"><mat-icon>label</mat-icon>Label contacts</button>
+  </div>
+  }
 </div>

@@ -14,7 +14,7 @@ export class ProfilePicker {
   @Input() selectedAvatar: string | undefined = undefined;
   @Input() name: string | null = null;
   defaultAvatar =
-    'https://www.gstatic.com/identity/boq/profilepicturepicker/photo_silhouette_e02a5f5deb3ffc173119a01bc9575490.png';
+    '/profile-placeholder.png';
   avatars = signal<any[]>([]);
   showMenu = signal<boolean>(false);
   showMore = signal<boolean>(false);

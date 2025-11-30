@@ -1,0 +1,10 @@
+<p class="copy-wrapper">
+  <span  #contentToCopy>
+    <ng-content ></ng-content>
+  </span>
+
+  <button matTooltipPosition="above"  [matTooltip]="tooltipMessage"  #tooltip="matTooltip" (click)="copy(contentToCopy, tooltip)">
+    <mat-icon class="copy-icon">content_copy</mat-icon>
+  </button>
+</p>
+

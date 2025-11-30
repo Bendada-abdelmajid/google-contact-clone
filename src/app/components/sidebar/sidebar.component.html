@@ -1,7 +1,7 @@
 <div class="sidenav">
   <div class="logo">
     <img
-      src="https://www.gstatic.com/images/branding/product/2x/contacts_2022_48dp.png"
+      src="contacts-48dp.png"
       width="40"
       height="40"
       alt=""
@@ -91,7 +91,8 @@
     <!-- Labels section -->
     <div class="label-cont">
       <span class="label">Labels</span>
-      <button (click)="openDialog(); hundellNavigation()" mat-icon-button>
+      <button matTooltipPosition="above"
+            matTooltip="Create label"  (click)="openDialog(); hundellNavigation()" mat-icon-button>
         <mat-icon>add</mat-icon>
       </button>
     </div>
@@ -104,10 +105,12 @@
           <span class="count">{{ item.contacts.length }}</span>
         </a>
         <div class="btns">
-          <button matIconButton (click)="updateLabel(item.name, item.id)">
+          <button matTooltipPosition="above"
+            matTooltip="Rename label"  matIconButton (click)="updateLabel(item.name, item.id)">
             <mat-icon class="small-icon">edit</mat-icon>
           </button>
-          <button matIconButton (click)="deleteLabel(item.id)">
+          <button matTooltipPosition="above"
+            matTooltip="Delete label"  matIconButton (click)="deleteLabel(item.id)">
             <mat-icon class="small-icon">delete</mat-icon>
           </button>
         </div>

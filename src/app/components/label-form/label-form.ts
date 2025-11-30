@@ -50,8 +50,9 @@ export class LabelForm {
     this.dialogRef.close(false);
   }
 
-  onConfirm(): void {
+  onConfirm(e: SubmitEvent): void {
     try {
+      e.preventDefault()
       if (this.name()) {
         if (this.data.id) {
           this.labelService.updateLabel(this.data.id, { name: this.name() });

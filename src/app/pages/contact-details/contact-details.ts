@@ -1,4 +1,4 @@
-import { Component, inject, signal, OnInit, OnDestroy, computed } from '@angular/core';
+import { Component, inject, signal, computed } from '@angular/core';
 import { ContactService } from '../../services/contact.service';
 import { Contact } from '../../../utils/contact.model';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
@@ -7,23 +7,37 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { ProfilePicker } from '../../components/profile-picker/profile-picker';
 import { MatMenuModule } from '@angular/material/menu';
-import { ContactPrint } from '../../components/contact-print/contact-print';
-import { Subject, takeUntil } from 'rxjs';
+import { ActionsMenu } from '../../components/actions-menu/actions-menu';
 import { MatDialog } from '@angular/material/dialog';
 import { DeleteDialogComponent } from '../../components/delete-dialog/delete-dialog';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { LabelSelector } from '../../components/label-selector/label-selector';
+import { LabelService } from '../../services/label.service';
+import { Label } from '../../../utils/label.modal';
+import { DialogService } from '../../services/dialog.service';
 
 @Component({
   selector: 'app-contact-details',
-  imports: [MatIconModule, MatButtonModule, RouterLink, ProfilePicker, MatMenuModule, ContactPrint],
+  imports: [
+    MatIconModule,
+    MatButtonModule,
+    RouterLink,
+    ProfilePicker,
+    MatMenuModule,
+    ActionsMenu,
+    MatTooltipModule,
+    LabelSelector,
+  ],
   templateUrl: './contact-details.html',
   styleUrl: './contact-details.css',
 })
 export class ContactDetails {
   contactService = inject(ContactService);
-  selectedAvatar = signal<string | undefined>(undefined);
+  labelService = inject(LabelService);
+
   contactId = signal<string>('');
   loading = signal<boolean>(false);
-  dialog = inject(MatDialog);
+  dialog = inject(DialogService);
   // ✅ Automatically updates when labels change
   contact = computed(() => {
     const id = this.contactId();
@@ -41,13 +55,15 @@ export class ContactDetails {
       return null;
     }
 
-    // Update avatar when contact changes
-    if (contactData?.photoUrl !== this.selectedAvatar()) {
-      this.selectedAvatar.set(contactData?.photoUrl);
-    }
-
     return contactData;
   });
+  contactLabels = computed<Label[]>(() => {
+    const currentContact = this.contact();
+    const labels = currentContact?.labelIds?.map((id) => this.labelService.getLabelById(id));
+    console.log(labels);
+    return labels?.filter((l): l is Label => !!l) || [];
+  });
+
   duplicatesContacts = computed(() => {
     const contact = this.contact();
     if (!contact) return [];
@@ -74,10 +90,8 @@ export class ContactDetails {
   mergeContacts() {
     try {
       this.loading.set(true);
-      console.log(this.duplicatesContacts() );
+      console.log(this.duplicatesContacts());
       setTimeout(() => {
-        
-
         // Stop loading after 3s
 
         this.contactService.mergeDuplicates(this.duplicatesContacts());
@@ -92,8 +106,18 @@ export class ContactDetails {
     this.contactService.dismissMerge(this.duplicatesContacts());
   }
 
-  avatarChange(url: string) {
-    this.selectedAvatar.set(url);
+  avatarChange(url: string, el: HTMLDivElement) {
+    const current = this.contact();
+    if (!current) return;
+    document.getElementById('loader')?.classList.add('show');
+    el.classList.add('disabled');
+    setTimeout(() => {
+      this.contactService.updateContact(current.id, { photoUrl: url });
+      document.getElementById('loader')?.classList.remove('show');
+      el.classList.remove('disabled');
+    }, 2000);
+
+    // this.selectedAvatar.set(url);
   }
 
   toggleFavorite() {
@@ -136,5 +160,16 @@ export class ContactDetails {
         console.log(this.contact());
       }
     });
+  }
+  handleLabelApply(selectedLabels: Label[]) {
+    const current = this.contact();
+    if (!current) return;
+    this.contactLabels().forEach((el) => {
+      this.labelService.removeContactFromLabel(el.id, current.id);
+    });
+    selectedLabels.forEach((el) => {
+      this.labelService.addContactToLabel(el.id, current.id);
+    });
+    this.contactService.updateContact(current.id, { labelIds: selectedLabels.map((el) => el.id) });
   }
 }

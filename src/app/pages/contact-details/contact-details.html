@@ -1,19 +1,23 @@
 @if (contact(); as contact) {
 <div class="content">
   <div class="nav">
-    <a routerLink="/" matIconButton class="back-btn" type="button">
+    <a    matTooltipPosition="above"
+            matTooltip="Back" routerLink="/" matIconButton class="back-btn" type="button">
       <mat-icon class="small-icon">arrow_back</mat-icon>
     </a>
     @if (!contact.deleted) {
-    <button matIconButton class="star-btn" type="button" (click)="toggleFavorite()">
+    <button   matTooltipPosition="above"
+            [matTooltip]="contact.favorite ? 'Remove from favorites' : 'Add to favorites'" matIconButton class="star-btn" type="button" (click)="toggleFavorite()">
       <mat-icon class="small-icon" [class.filled]="contact.favorite">star</mat-icon>
     </button>
     <a [routerLink]="['/person', contact.id, 'edit']" mat-flat-button type="submit">edit</a>
-    <button matIconButton type="button" (click)="deleteContact()">
+    <button  matTooltipPosition="above"
+            matTooltip="Delete" matIconButton type="button" (click)="deleteContact()">
       <mat-icon class="small-icon">delete</mat-icon>
     </button>
 
-    <button
+    <button  matTooltipPosition="above"
+            matTooltip="More actions" 
       matIconButton
       [matMenuTriggerFor]="actionsMenu"
       aria-label="Example icon-button with a menu"
@@ -22,13 +26,13 @@
     </button>
 
     <mat-menu #actionsMenu="matMenu">
-      <app-contact-print [contacts]="[contact]" [detailsPage]="true"></app-contact-print> </mat-menu
+      <app-actions-menu [contacts]="[contact]" [detailsPage]="true"></app-actions-menu> </mat-menu
     >}
   </div>
-  <div class="hero">
-    <app-profile-picker
-      [selectedAvatar]="selectedAvatar()"
-      (avatarChange)="avatarChange($event)"
+  <div class="hero"  #hero >
+    <app-profile-picker class="avatar-cont"
+      [selectedAvatar]="contact?.photoUrl"
+      (avatarChange)="avatarChange($event,hero )"
       [name]="contact.firstName || null"
     ></app-profile-picker>
     <h4>{{ contact.firstName || '' }} {{ contact.lastName || '' }}</h4>
@@ -53,6 +57,7 @@
     </div>
     <hr />
   </div>
+  <app-label-selector class="labels-cont" [selectedLabels]="contactLabels()" (onApply)="handleLabelApply($event)"></app-label-selector>
   <div class="body">
     <div>
       @if (contact && contact.deleted) {

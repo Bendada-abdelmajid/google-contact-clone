@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ContactPrint } from './contact-print';
+import { CopyWrapper } from './copy-wrapper';
 
-describe('ContactPrint', () => {
-  let component: ContactPrint;
-  let fixture: ComponentFixture<ContactPrint>;
+describe('CopyWrapper', () => {
+  let component: CopyWrapper;
+  let fixture: ComponentFixture<CopyWrapper>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ContactPrint]
+      imports: [CopyWrapper]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(ContactPrint);
+    fixture = TestBed.createComponent(CopyWrapper);
     component = fixture.componentInstance;
-    fixture.detectChanges();
+    await fixture.whenStable();
   });
 
   it('should create', () => {

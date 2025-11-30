@@ -4,7 +4,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 export class PexelsService {
   private http = inject(HttpClient);
   private API_URL = 'https://api.pexels.com/v1/search';
-  private API_KEY = import.meta.env.NG_APP_API_KEY; 
+  private API_KEY = process.env.NG_APP_API_KEY; 
 
   getAvatars(query = 'cats', perPage = 12) {
     const headers = new HttpHeaders({ Authorization: this.API_KEY });

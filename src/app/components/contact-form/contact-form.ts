@@ -130,7 +130,7 @@ export class ContactForm {
                 value: [phone.value],
               })
             )
-          : [this.createPhoneGroup()]
+          : []
       ),
       addresses: this.fb.array(
         this.contact?.addresses?.length
